@@ -27,3 +27,5 @@ pg_restore --verbose --clean -U "$USER" -d cesta_visconti_development "$FILE"
 
 # Inicie o servidor Rails na porta 3001
 rails s -p 3001
+
+
