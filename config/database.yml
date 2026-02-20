@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: confer_development
+
+test:
+  <<: *default
+  database: confer_test
+
+production:
+  <<: *default
+  database: confer_production
+  username: confer
+  password: <%= ENV["CONFER_DATABASE_PASSWORD"] %>
