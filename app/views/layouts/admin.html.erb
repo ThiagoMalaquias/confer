@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Painel Administrativo | Digno Benefícios</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="">
+    <meta property="og:site_name" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- CSS Files -->
+    <%= stylesheet_link_tag "application", media: 'all', "data-turbo-track": "reload" %>
+    <link rel="shortcut icon" href="/site/assets/img/logo.png" >
+    <link href="/dash/assets/css/argon-dashboard.css" rel="stylesheet" />
+    <link href="/dash/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/dash/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="/dash/assets/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- JS Files -->
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="/dash/assets/js/plugins/chartjs.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js" referrerpolicy="no-referrer"></script>
+  </head>
+  <body class="g-sidenav-show  bg-gray-100">
+    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    <%= render 'layouts/admin/aside' %>
+    <main class="main-content position-relative border-radius-lg ">
+      <%= yield %>
+    </main>
+    <%= render 'layouts/admin/scripts', notice: notice %>
+  </body>
+</html>

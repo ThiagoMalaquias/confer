@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cesteiro: one
+  pagamento: one
+  valor: 1.5
+  porcentagem: MyString
+  valor_final: 1.5
+  tipo: MyString
+
+two:
+  cesteiro: two
+  pagamento: two
+  valor: 1.5
+  porcentagem: MyString
+  valor_final: 1.5
+  tipo: MyString

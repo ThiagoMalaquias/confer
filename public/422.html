@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="/dash/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/dash/assets/img/favicon.png">
+    <title>Erro de Processamento | MetLife</title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="/dash/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/dash/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <link href="/dash/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/dash/assets/css/argon-dashboard.css?v=2.0.2" rel="stylesheet" />
+    <style>
+      .bg-gradient-primary {
+        background-image: linear-gradient(310deg, #000 0%, #b3ff19 100%);
+      }
+      .btn-dark {
+        color: #fff;
+        background-color: #000;
+        border-color: #000;
+      }
+      .btn-dark:hover {
+        color: #fff;
+        background-color: #000;
+        border-color: #000;
+      }
+      .error-page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+      }
+      .error-card {
+        background: white;
+        border-radius: 20px;
+        padding: 3rem;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        max-width: 600px;
+        width: 90%;
+      }
+      .error-number {
+        font-size: 8rem;
+        font-weight: 700;
+        color: #ff6b6b;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      }
+      .error-title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1rem;
+      }
+      .error-message {
+        font-size: 1.1rem;
+        color: #666;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+      .error-details {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        text-align: left;
+      }
+      .error-details h4 {
+        color: #333;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+      }
+      .error-details ul {
+        color: #666;
+        margin: 0;
+        padding-left: 1.5rem;
+      }
+      .error-details li {
+        margin-bottom: 0.5rem;
+      }
+      .error-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn-custom {
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+      }
+      .btn-primary-custom {
+        background: linear-gradient(310deg, #000 0%, #b3ff19 100%);
+        color: white;
+      }
+      .btn-primary-custom:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        color: white;
+      }
+      .btn-secondary-custom {
+        background: #f8f9fa;
+        color: #333;
+        border: 2px solid #e9ecef;
+      }
+      .btn-secondary-custom:hover {
+        background: #e9ecef;
+        color: #333;
+        transform: translateY(-2px);
+      }
+      .btn-warning-custom {
+        background: #ffc107;
+        color: #333;
+        border: 2px solid #ffc107;
+      }
+      .btn-warning-custom:hover {
+        background: #e0a800;
+        color: #333;
+        transform: translateY(-2px);
+      }
+      .icon-large {
+        font-size: 4rem;
+        color: #ff6b6b;
+        margin-bottom: 1rem;
+      }
+      @media (max-width: 768px) {
+        .error-card {
+          padding: 2rem;
+          margin: 1rem;
+        }
+        .error-number {
+          font-size: 6rem;
+        }
+        .error-title {
+          font-size: 1.5rem;
+        }
+        .error-actions {
+          flex-direction: column;
+        }
+        .error-details {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error-page">
+      <div class="error-card">
+        <div class="icon-large">
+          <i class="ni ni-settings-gear-65"></i>
+        </div>
+        <div class="error-number">422</div>
+        <h1 class="error-title">Erro de Processamento</h1>
+        <p class="error-message">
+          A requisição foi recebida, mas não pode ser processada devido a dados inválidos ou incompletos.
+        </p>
+        
+        <div class="error-details">
+          <h4><i class="ni ni-bulb-61"></i> Possíveis causas:</h4>
+          <ul>
+            <li>Dados obrigatórios não foram preenchidos</li>
+            <li>Formato de dados inválido (email, CPF, telefone, etc.)</li>
+            <li>Valores fora do intervalo permitido</li>
+            <li>Caracteres especiais não suportados</li>
+            <li>Arquivo muito grande ou formato não aceito</li>
+          </ul>
+        </div>
+        
+        <div class="error-actions">
+          <a href="/" class="btn-custom btn-primary-custom">
+            <i class="ni ni-shop"></i> Voltar ao Início
+          </a>
+          <button class="btn-custom btn-secondary-custom" onclick="goBack()">
+            <i class="ni ni-bold-left"></i> Voltar
+          </button>
+        </div>
+        
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e9ecef;">
+          <p style="color: #999; font-size: 0.9rem;">
+            <i class="ni ni-support-16"></i> 
+            Se o problema persistir, entre em contato com nosso suporte técnico.
+          </p>
+        </div>
+      </div>
+    </div>
+ 
+    <!--   Core JS Files   -->
+    <script src="/dash/assets/js/core/popper.min.js"></script>
+    <script src="/dash/assets/js/core/bootstrap.min.js"></script>
+    <script src="/dash/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/dash/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+      var win = navigator.platform.indexOf('Win') > -1;
+      if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+          damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+      }
+      
+      function goBack() {
+        window.history.back();
+      }
+      
+      function refreshPage() {
+        window.location.reload();
+      }
+      
+      // Adicionar efeito de digitação no título
+      function typeWriter(element, text, speed = 100) {
+        let i = 0;
+        element.innerHTML = '';
+        function type() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          }
+        }
+        type();
+      }
+      
+      // Iniciar animação quando a página carregar
+      document.addEventListener('DOMContentLoaded', function() {
+        const title = document.querySelector('.error-title');
+        const originalText = title.textContent;
+        typeWriter(title, originalText, 80);
+      });
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="/dash/assets/js/argon-dashboard.min.js?v=2.0.2"></script>
+  </body>
+</html>

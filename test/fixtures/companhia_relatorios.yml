@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  companhia: one
+  conteudo: MyString
+  qtd_registros: 1
+  status: MyString
+
+two:
+  companhia: two
+  conteudo: MyString
+  qtd_registros: 1
+  status: MyString

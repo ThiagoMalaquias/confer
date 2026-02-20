@@ -1,0 +1,39 @@
+<!--   Core JS Files   -->
+<script src="/dash/assets/js/core/popper.min.js"></script>
+<script src="/dash/assets/js/core/bootstrap.min.js"></script>
+<script src="/dash/assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="/dash/assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script type="text/javascript" src="/site/assets/js/jquery.mask.min.js"></script>
+<!-- Github buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="/dash/assets/js/argon-dashboard.min.js?v=2.0.2"></script>
+<script src="/dash/assets/js/scripts.js"></script>
+<script>
+  $(document).ready(function(){
+    let name = ""
+    let msg = ""
+    <% flash.each do |name, msg| %>
+    name = '<%= name %>'; msg = '<%= msg %>';
+    <% end %>
+
+    if(name == 'error'){ return swal('Erro', `${msg}`, 'error') }
+    if(name == 'notice'){ return swal('Sucesso', `${msg}`, 'success') }
+  })
+
+  window.addEventListener('beforeunload', function(event) {
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    if (navbarCollapse) {
+        localStorage.setItem('navbarScrollPosition', navbarCollapse.scrollTop);
+    }
+  });
+
+  window.addEventListener('load', function() {
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    const scrollPosition = localStorage.getItem('navbarScrollPosition');
+    if (navbarCollapse && scrollPosition) {
+        navbarCollapse.scrollTop = parseInt(scrollPosition, 10);
+        localStorage.removeItem('navbarScrollPosition'); // Limpa a posição após usá-la
+    }
+  });
+</script>

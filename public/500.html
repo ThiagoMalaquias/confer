@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="/dash/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/dash/assets/img/favicon.png">
+    <title>Erro Interno do Servidor | MetLife</title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="/dash/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/dash/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <link href="/dash/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/dash/assets/css/argon-dashboard.css?v=2.0.2" rel="stylesheet" />
+    <style>
+      .bg-gradient-primary {
+        background-image: linear-gradient(310deg, #000 0%, #b3ff19 100%);
+      }
+      .btn-dark {
+        color: #fff;
+        background-color: #000;
+        border-color: #000;
+      }
+      .btn-dark:hover {
+        color: #fff;
+        background-color: #000;
+        border-color: #000;
+      }
+      .error-page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      .error-page::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        opacity: 0.3;
+      }
+      .error-card {
+        background: white;
+        border-radius: 20px;
+        padding: 3rem;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        max-width: 600px;
+        width: 90%;
+        position: relative;
+        z-index: 1;
+      }
+      .error-number {
+        font-size: 8rem;
+        font-weight: 700;
+        color: #e74c3c;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+      }
+      .error-title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1rem;
+      }
+      .error-message {
+        font-size: 1.1rem;
+        color: #666;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+      .error-details {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        text-align: left;
+        border-left: 4px solid #e74c3c;
+      }
+      .error-details h4 {
+        color: #333;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+      }
+      .error-details ul {
+        color: #666;
+        margin: 0;
+        padding-left: 1.5rem;
+      }
+      .error-details li {
+        margin-bottom: 0.5rem;
+      }
+      .error-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn-custom {
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+      }
+      .btn-primary-custom {
+        background: linear-gradient(310deg, #000 0%, #b3ff19 100%);
+        color: white;
+      }
+      .btn-primary-custom:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        color: white;
+      }
+      .btn-secondary-custom {
+        background: #f8f9fa;
+        color: #333;
+        border: 2px solid #e9ecef;
+      }
+      .btn-secondary-custom:hover {
+        background: #e9ecef;
+        color: #333;
+        transform: translateY(-2px);
+      }
+      .btn-warning-custom {
+        background: #ffc107;
+        color: #333;
+        border: 2px solid #ffc107;
+      }
+      .btn-warning-custom:hover {
+        background: #e0a800;
+        color: #333;
+        transform: translateY(-2px);
+      }
+      .btn-danger-custom {
+        background: #e74c3c;
+        color: white;
+        border: 2px solid #e74c3c;
+      }
+      .btn-danger-custom:hover {
+        background: #c0392b;
+        color: white;
+        transform: translateY(-2px);
+      }
+      .icon-large {
+        font-size: 4rem;
+        color: #e74c3c;
+        margin-bottom: 1rem;
+        animation: shake 0.5s ease-in-out infinite alternate;
+      }
+      @keyframes shake {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(5px); }
+      }
+      .status-indicator {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #e74c3c;
+        margin-right: 8px;
+        animation: blink 1s infinite;
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0.3; }
+      }
+      .contact-info {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 10px;
+        padding: 1rem;
+        margin-top: 2rem;
+      }
+      .contact-info h5 {
+        color: #856404;
+        margin-bottom: 0.5rem;
+      }
+      .contact-info p {
+        color: #856404;
+        margin: 0;
+        font-size: 0.9rem;
+      }
+      @media (max-width: 768px) {
+        .error-card {
+          padding: 2rem;
+          margin: 1rem;
+        }
+        .error-number {
+          font-size: 6rem;
+        }
+        .error-title {
+          font-size: 1.5rem;
+        }
+        .error-actions {
+          flex-direction: column;
+        }
+        .error-details {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error-page">
+      <div class="error-card">
+        <div class="icon-large">
+          <i class="ni ni-settings-gear-65"></i>
+        </div>
+        <div class="error-number">500</div>
+        <h1 class="error-title">Erro Interno do Servidor</h1>
+        <p class="error-message">
+          Ocorreu um erro inesperado em nossos servidores. Nossa equipe técnica foi notificada e está trabalhando para resolver o problema.
+        </p>
+        
+        <div class="error-details">
+          <h4><i class="ni ni-bulb-61"></i> O que aconteceu?</h4>
+          <ul>
+            <li>Um erro interno ocorreu no servidor</li>
+            <li>Nossos sistemas estão temporariamente indisponíveis</li>
+            <li>O problema não está relacionado ao seu dispositivo</li>
+            <li>Nossa equipe já foi notificada automaticamente</li>
+          </ul>
+        </div>
+        
+        <div class="error-actions">
+          <a href="/" class="btn-custom btn-primary-custom">
+            <i class="ni ni-shop"></i> Voltar ao Início
+          </a>
+          <button class="btn-custom btn-secondary-custom" onclick="goBack()">
+            <i class="ni ni-bold-left"></i> Voltar
+          </button>
+        </div>
+        
+        <div class="contact-info">
+          <h5><i class="ni ni-support-16"></i> Precisa de ajuda?</h5>
+          <p>
+            <span class="status-indicator"></span>
+            Nossa equipe de suporte está disponível 24/7 para ajudar.
+            Entre em contato através do email: <strong>suporte@metlife.com</strong>
+          </p>
+        </div>
+        
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e9ecef;">
+          <p style="color: #999; font-size: 0.9rem;">
+            <i class="ni ni-time-alarm"></i> 
+            Tempo estimado de resolução: 15-30 minutos
+          </p>
+        </div>
+      </div>
+    </div>
+ 
+    <!--   Core JS Files   -->
+    <script src="/dash/assets/js/core/popper.min.js"></script>
+    <script src="/dash/assets/js/core/bootstrap.min.js"></script>
+    <script src="/dash/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/dash/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+      var win = navigator.platform.indexOf('Win') > -1;
+      if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+          damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+      }
+      
+      function goBack() {
+        window.history.back();
+      }
+      
+      function refreshPage() {
+        window.location.reload();
+      }
+      
+      // Adicionar efeito de digitação no título
+      function typeWriter(element, text, speed = 100) {
+        let i = 0;
+        element.innerHTML = '';
+        function type() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          }
+        }
+        type();
+      }
+      
+      // Verificar status do servidor periodicamente
+      function checkServerStatus() {
+        fetch('/health', { method: 'HEAD' })
+          .then(response => {
+            if (response.ok) {
+              window.location.reload();
+            }
+          })
+          .catch(error => {
+            console.log('Servidor ainda indisponível');
+          });
+      }
+      
+      // Iniciar verificações quando a página carregar
+      document.addEventListener('DOMContentLoaded', function() {
+        const title = document.querySelector('.error-title');
+        const originalText = title.textContent;
+        typeWriter(title, originalText, 80);
+        
+        // Verificar status do servidor a cada 30 segundos
+        setInterval(checkServerStatus, 30000);
+      });
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="/dash/assets/js/argon-dashboard.min.js?v=2.0.2"></script>
+  </body>
+</html>

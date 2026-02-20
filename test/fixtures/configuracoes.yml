@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  telefone: MyString
+  email: MyString
+  valor_max_tres: MyString
+  valor_max_seis: MyString
+
+two:
+  telefone: MyString
+  email: MyString
+  valor_max_tres: MyString
+  valor_max_seis: MyString

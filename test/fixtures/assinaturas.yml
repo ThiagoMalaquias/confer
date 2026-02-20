@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  origem: MyString
+  plano: one
+  valor: 1.5
+  status: MyString
+  log_retorno_transacao: MyString
+
+two:
+  origem: MyString
+  plano: two
+  valor: 1.5
+  status: MyString
+  log_retorno_transacao: MyString

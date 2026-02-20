@@ -1,0 +1,66 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "db/**/*"
+    - "vendor/**/*"
+    - "tmp/**/*"
+    - "log/**/*"
+    - "bin/*"
+    - "node_modules/*"
+
+inherit_from: .rubocop_todo.yml
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-minitest
+
+Layout/LineLength:
+  Max: 250
+
+Metrics/ClassLength:
+  Max: 266
+
+Style/RescueModifier:
+  Enabled: false
+
+Layout/RescueEnsureAlignment:
+  Enabled: false
+
+Style/RescueStandardError:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Style/BarePercentLiterals:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/RedundantReturn:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Style/HashSyntax:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Rails/SaveBang:
+  Enabled: false

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cesteiro: one
+  vendedor: one
+  conteudo: MyText
+  status: MyString
+
+two:
+  cesteiro: two
+  vendedor: two
+  conteudo: MyText
+  status: MyString

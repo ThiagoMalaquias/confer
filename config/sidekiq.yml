@@ -1,0 +1,7 @@
+:concurrency: 3
+:pidfile: tmp/pids/sidekiq.pid
+:max_retries: 3
+production:
+  :concurrency: 10
+:queues:
+  - default

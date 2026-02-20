@@ -1,0 +1,1 @@
+Administrador.find_or_create_by!(nome: "Pliber Carlos", email: "asaopoasdjpa@gmail.com", senha: "123456")

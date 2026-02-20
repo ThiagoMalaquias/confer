@@ -1,0 +1,29 @@
+<div style="font-family: Arial, sans-serif; background: #f7f7f7; padding: 40px 0;">
+  <div style="max-width: 500px; margin: auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); padding: 32px;">
+    <div style="text-align: center;">
+      <h1 style="color: #2d3748; font-size: 24px; margin-bottom: 16px;">Redefinição de senha</h1>
+    </div>
+    <div style="margin-bottom: 24px;">
+      <p style="color: #4a5568; font-size: 16px;">
+        Olá, <%= @user.nome %>
+      </p>
+      <p style="color: #4a5568; font-size: 16px;">
+        Recebemos uma solicitação para redefinir a senha do seu acesso administrativo.<br>
+        Para criar uma nova senha, clique no botão abaixo:
+      </p>
+      <div style="text-align: center; margin: 32px 0;">
+        <a href="https://dignobeneficios.com.br/<%= @reset_password_url %>" style="background: #007bff; color: #fff; text-decoration: none; padding: 14px 32px; border-radius: 6px; font-size: 16px; display: inline-block;">
+          Redefinir senha
+        </a>
+      </div>
+      <p style="color: #4a5568; font-size: 15px;">
+        Se você não solicitou a redefinição, ignore este email. Sua senha permanecerá a mesma.
+      </p>
+      <hr style="margin: 32px 0;">
+      <p style="color: #a0aec0; font-size: 13px; text-align: center;">
+        Este email foi enviado para <%= @user.email %>.<br>
+        Caso tenha dúvidas, entre em contato com o suporte.
+      </p>
+    </div>
+  </div>
+</div>
