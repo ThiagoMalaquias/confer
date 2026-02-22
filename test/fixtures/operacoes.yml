@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  qtd: 1
+  numero: 1
+  pedido_venda: 1
+  observacao: MyText
+
+two:
+  qtd: 1
+  numero: 1
+  pedido_venda: 1
+  observacao: MyText

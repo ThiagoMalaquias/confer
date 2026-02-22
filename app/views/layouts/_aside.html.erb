@@ -1,0 +1,68 @@
+<aside id="sidebar" class="w-64 bg-muted fixed inset-y-0 left-0 flex flex-col z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
+  <!-- Logo Section -->
+  <div class="px-6 py-4">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <%= image_tag "/assets/images/logo.png", alt: "Logo", class: "h-16 w-auto object-contain flex-shrink-0" %>
+        <div class="min-w-0">
+          <h1 class="text-foreground text-lg font-bold truncate">Confer</h1>
+          <p class="text-foreground text-xs font-normal">Conferência de Cestas</p>
+        </div>
+      </div>
+      <button onclick="toggleSidebar()" aria-label="Close sidebar" class="lg:hidden p-2 rounded-lg hover:bg-gray-200 cursor-pointer transition-all duration-200">
+        <i data-lucide="x" class="w-5 h-5 text-gray-600"></i>
+      </button>
+    </div>
+  </div>
+  <!-- Navigation Menu - BANDUNG STYLE -->
+  <nav class="flex-1 px-6 py-4 space-y-6 overflow-y-auto">
+    <!-- Conferência e Cestas -->
+    <div>
+      <h3 class="text-foreground text-xs font-semibold uppercase tracking-wider mb-3">Conferência</h3>
+      <div class="space-y-1">
+        <a href="/" class="group cursor-pointer">
+          <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'home' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
+            <i data-lucide="layout-dashboard" class="w-5 h-5 <%= params[:controller] != 'home' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
+            <span class="<%= params[:controller] != 'home' ? 'text-foreground group-hover:text-primary' : '' %>">Início</span>
+          </div>
+        </a>
+        <a href="/produtos" class="group cursor-pointer">
+          <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'produtos' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
+            <i data-lucide="boxes" class="w-5 h-5 <%= params[:controller] != 'produtos' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
+            <span class="<%= params[:controller] != 'produtos' ? 'text-foreground group-hover:text-primary' : '' %>">Produtos</span>
+          </div>
+        </a>
+        <a href="/administradores" class="group cursor-pointer">
+          <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'administradores' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
+            <i data-lucide="users" class="w-5 h-5 <%= params[:controller] != 'administradores' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
+            <span class="<%= params[:controller] != 'administradores' ? 'text-foreground group-hover:text-primary' : '' %>">Usuários Internos</span>
+          </div>
+        </a>
+        <a href="/operacoes" class="group cursor-pointer">
+          <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'operacoes' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
+            <i data-lucide="package-check" class="w-5 h-5 <%= params[:controller] != 'operacoes' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
+            <span class="<%= params[:controller] != 'operacoes' ? 'text-foreground group-hover:text-primary' : '' %>">OPs</span>
+          </div>
+        </a>
+        <a href="/operacao_pedidos" class="group cursor-pointer">
+          <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'operacao_pedidos' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
+            <i data-lucide="shopping-basket" class="w-5 h-5 <%= params[:controller] != 'operacao_pedidos' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
+            <span class="<%= params[:controller] != 'operacao_pedidos' ? 'text-foreground group-hover:text-primary' : '' %>">Pedidos</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </nav>
+  <!-- Usuário no rodapé -->
+  <div class="px-6 pb-6 mt-auto">
+    <div class="flex items-center gap-3">
+      <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
+        <i data-lucide="user" class="w-6 h-6 text-primary"></i>
+      </div>
+      <div class="min-w-0 flex-1">
+        <p class="text-foreground text-base font-semibold truncate"><%= @current_user.nome %></p>
+        <p class="text-foreground text-sm font-normal truncate"><%= @current_user.email %></p>
+      </div>
+    </div>
+  </div>
+</aside>

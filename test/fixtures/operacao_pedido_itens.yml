@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  operacao: one
+  pedido: one
+  codigo: MyString
+  descricao: MyText
+  lote: MyString
+  vencimento: 2026-02-22
+  fabricacao: MyString
+  prazo: MyString
+
+two:
+  operacao: two
+  pedido: two
+  codigo: MyString
+  descricao: MyText
+  lote: MyString
+  vencimento: 2026-02-22
+  fabricacao: MyString
+  prazo: MyString

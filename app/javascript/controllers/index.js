@@ -5,7 +5,12 @@
 import { application } from "./application"
 
 import HelloController from "./hello_controller"
+import HomeChartsController from "./home_charts_controller"
+import LucideController from "./lucide_controller"
+
 application.register("hello", HelloController)
+application.register("home-charts", HomeChartsController)
+application.register("lucide", LucideController)
 
 
 
