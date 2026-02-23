@@ -1,12 +1,12 @@
 class AwsService
   AWS_ID = Rails.application.credentials.dig(:aws, :access_key_id)
   AWS_KEY = Rails.application.credentials.dig(:aws, :secret_access_key)
-  BUCKET  = 'new-funeraria'.freeze
+  BUCKET  = 'confer-cestas'.freeze
 
   def self.s3
     Aws::S3::Resource.new(
       credentials: Aws::Credentials.new(AWS_ID, AWS_KEY),
-      region: 'sa-east-1'
+      region: 'us-east-1'
     )
   end
 
