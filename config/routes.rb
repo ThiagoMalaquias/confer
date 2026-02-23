@@ -1,18 +1,18 @@
-require 'sidekiq/web'
 Rails.application.routes.draw do
-  # sidekiq server
-  mount Sidekiq::Web => '/sidekiq'
-
   resources :operacoes
-  resources :operacao_pedidos
   resources :operacao_pedido_itens
   resources :administradores
   resources :importacoes
   resources :grupo_acessos
 
+  resources :operacao_pedidos do
+    get "gerar_pedido/:id_operacao", on: :collection, action: :gerar_pedido
+  end
+
   resources :produtos do
     collection do
       get :buscar
+      get :buscar_por_ean
     end
   end
 

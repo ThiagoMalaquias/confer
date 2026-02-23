@@ -1,4 +1,3 @@
 class OperacaoPedidoItem < ApplicationRecord
-  belongs_to :operacao
-  belongs_to :pedido
+  belongs_to :operacao_pedido
 end

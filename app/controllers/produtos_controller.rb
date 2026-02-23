@@ -18,6 +18,15 @@ class ProdutosController < ApplicationController
     end
   end
 
+  def buscar_por_ean
+    @produto = Produto.find_by(ean: params[:ean].to_s.strip)
+    if @produto
+      render json: { codigo: @produto.codigo, descricao: @produto.descricao, ean: @produto.ean }
+    else
+      render json: { error: "Produto não encontrado" }, status: :not_found
+    end
+  end
+
   def show
   end
 

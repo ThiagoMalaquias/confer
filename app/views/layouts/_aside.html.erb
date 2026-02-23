@@ -32,12 +32,6 @@
             <span class="<%= params[:controller] != 'produtos' ? 'text-foreground group-hover:text-primary' : '' %>">Produtos</span>
           </div>
         </a>
-        <a href="/administradores" class="group cursor-pointer">
-          <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'administradores' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
-            <i data-lucide="users" class="w-5 h-5 <%= params[:controller] != 'administradores' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
-            <span class="<%= params[:controller] != 'administradores' ? 'text-foreground group-hover:text-primary' : '' %>">Usuários Internos</span>
-          </div>
-        </a>
         <a href="/operacoes" class="group cursor-pointer">
           <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'operacoes' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
             <i data-lucide="package-check" class="w-5 h-5 <%= params[:controller] != 'operacoes' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
@@ -54,6 +48,12 @@
           <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'importacoes' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
             <i data-lucide="upload" class="w-5 h-5 <%= params[:controller] != 'importacoes' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
             <span class="<%= params[:controller] != 'importacoes' ? 'text-foreground group-hover:text-primary' : '' %>">Importações</span>
+          </div>
+        </a>
+        <a href="/administradores" class="group cursor-pointer">
+          <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'administradores' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
+            <i data-lucide="users" class="w-5 h-5 <%= params[:controller] != 'administradores' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
+            <span class="<%= params[:controller] != 'administradores' ? 'text-foreground group-hover:text-primary' : '' %>">Usuários Internos</span>
           </div>
         </a>
         <a href="/grupo_acessos" class="group cursor-pointer">
