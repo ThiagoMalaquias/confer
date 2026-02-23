@@ -14,6 +14,3 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 ActiveStorageDragAndDrop.start()
-
-require("trix")
-require("@rails/actiontext")
