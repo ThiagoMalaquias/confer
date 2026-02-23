@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    # Dados para o gráfico de receita (linha)
+      # Dados para o gráfico de receita (linha)
     @revenue_labels = %w[Jan Fev Mar Abr Mai Jun]
     @revenue_data = [42, 55, 48, 67, 58, 72]
 

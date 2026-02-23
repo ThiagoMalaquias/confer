@@ -16,73 +16,54 @@
 
 
 /* Will Pagination */
+/* Will Pagination - alinhado ao tema */
 .apple_pagination {
   margin: 20px 0;
-  background: #ffffff;
-  border: 1px solid #e5e5e5;
+  background: var(--muted, #F7F7F7);
+  border: 1px solid var(--border, #DCDEDD);
   text-align: center;
   padding: 0.5em;
   cursor: default;
-  font-size: .9rem;
+  font-size: 0.9rem;
+  border-radius: var(--radius-button, 16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
 }
 
 .apple_pagination a,
 .apple_pagination span {
-  padding: 0.2em 0.3em;
+  padding: 0.35em 0.6em;
+  border-radius: var(--radius-button, 16px);
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .apple_pagination .disabled {
-  color: #aaaaaa;
+  color: var(--gray-500, #6B7280);
 }
 
 .apple_pagination .current {
   font-style: normal;
-  font-weight: bold;
-  background-color: #bebebe;
+  font-weight: 600;
+  background-color: var(--primary, #EF3F09);
+  color: #fff;
   display: inline-block;
-  min-width: 1.4em;
-  height: 1.4em;
-  line-height: 1.5;
-  -moz-border-radius: 1em;
-  -webkit-border-radius: 1em;
-  border-radius: 1em;
-  text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 1px;
+  min-width: 1.75em;
+  height: 1.75em;
+  line-height: 1.75;
+  text-align: center;
+  border-radius: var(--radius-button, 16px);
 }
 
 .apple_pagination a {
   text-decoration: none;
-  color: black;
+  color: var(--foreground, #0C1C3C);
 }
 
 .apple_pagination a:hover,
 .apple_pagination a:focus {
-  color: #495057;
-}
-
-/* Formatted Text */
-.formatted-text {
-  word-wrap: break-word;
-  min-height: 50px;
-  width: 100%;
-}
-
-/* Dashboard Cesteiro */
-.invoice-box {
-  font-family: 'Segoe UI', 'Arial', sans-serif;
-  font-size: 1.05em;
-  line-height: 1.5;
-}
-
-.invoice-box hr {
-  border-top: 1px dashed #bbb;
-}
-
-.link-default:hover {
-  color: #344767c4;
-  text-decoration: none;
-}
-
-.form-input {
-  height: 55px;
-  padding: 0 20px;
+  background-color: var(--muted, #F7F7F7);
+  color: var(--primary, #EF3F09);
 }

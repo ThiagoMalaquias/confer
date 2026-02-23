@@ -9,20 +9,30 @@
   </div>
 
   <!-- Page Header -->
-  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 md:mb-8">
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 md:mb-8" data-controller="importacao-upload" data-importacao-upload-tipo-value="produto">
     <div>
       <h1 class="text-foreground text-2xl md:text-3xl font-bold mb-1">Produtos</h1>
       <p class="text-foreground text-sm text-gray-500 mt-1">Gerencie os produtos do sistema</p>
     </div>
-    <%= link_to new_produto_path, class: 'inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-button font-medium transition-colors shadow-sm' do %>
-      <i data-lucide="plus" class="w-5 h-5"></i>
-      Novo Produto
-    <% end %>
+    <div class="flex items-center gap-2">
+      <%= form_with url: importacoes_path, method: :post, local: true, html: { multipart: true, class: "inline", data: { importacao_upload_target: "form" } } do |f| %>
+        <%= hidden_field_tag "importacao[tipo]", "produto", data: { importacao_upload_target: "tipoInput" } %>
+        <input type="file" name="relatorio" accept=".xlsx" class="hidden" data-importacao-upload-target="fileInput" data-action="change->importacao-upload#submit">
+      <% end %>
+      <button type="button" data-action="click->importacao-upload#open" class="inline-flex items-center gap-2 px-4 py-2 rounded-button border border-border text-foreground font-medium hover:bg-muted/50 transition-colors shadow-sm">
+        <i data-lucide="upload" class="w-5 h-5"></i>
+        Importação
+      </button>
+      <%= link_to new_produto_path, class: 'inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-button font-medium transition-colors shadow-sm' do %>
+        <i data-lucide="plus" class="w-5 h-5"></i>
+        Novo Produto
+      <% end %>
+    </div>
   </div>
 
   <!-- Table Card -->
   <div class="bg-muted rounded-card pt-5 px-3 pb-3 mb-6 md:mb-8">
-    <h3 class="text-foreground text-lg font-bold ml-3 mb-4">Lista de produtos</h3>
+    <h3 class="text-foreground text-lg font-bold ml-3 mb-4">Lista de produtos (<%= @count %>)</h3>
     <div class="bg-white rounded-card overflow-hidden border border-border">
       <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-border">
@@ -74,7 +84,7 @@
       <!-- Pagination -->
       <% if @produtos.respond_to?(:total_pages) && @produtos.total_pages > 1 %>
         <div class="px-6 py-4 border-t border-border">
-          <div class="flex items-center justify-center">
+          <div class="apple_pagination flex items-center justify-center">
             <%= will_paginate @produtos, container: false, class: 'flex items-center gap-2' %>
           </div>
         </div>

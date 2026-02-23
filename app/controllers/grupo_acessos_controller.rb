@@ -96,13 +96,13 @@ class GrupoAcessosController < ApplicationController
     @menu << prepare_item_subs(item)
 
     item = {
-      nome: "Vendas",
+      nome: "Importações",
       itens: [
         {
           controllers: [
             {
-              controller: "VendasController",
-              nome: "Vendas",
+              controller: "ImportacoesController",
+              nome: "Importações",
               actions: []
             }
           ]
@@ -113,18 +113,13 @@ class GrupoAcessosController < ApplicationController
     @menu << prepare_item_subs(item)
     
     item = {
-      nome: "Filiais",
+      nome: "Operações",
       itens: [
         {
           controllers: [
             {
-              controller: "FiliaisController",
-              nome: "Filiais",
-              actions: []
-            },
-            {
-              controller: "FilialProdutosController",
-              nome: "Filial Produtos",
+              controller: "OperacoesController",
+              nome: "Operações",
               actions: []
             }
           ]
@@ -143,16 +138,6 @@ class GrupoAcessosController < ApplicationController
               controller: "AdministradoresController",
               nome: "Administradores",
               actions: []
-            },
-            {
-              controller: "GrupoAcessosController",
-              nome: "Grupo Acessos",
-              actions: []
-            },
-            {
-              controller: "FinanceirosController",
-              nome: "Financeiro",
-              actions: []
             }
           ]
         }
@@ -170,15 +155,39 @@ class GrupoAcessosController < ApplicationController
               controller: "ProdutosController",
               nome: "Produtos",
               actions: []
-            },
+            }
+          ]
+        }
+      ]
+    }
+
+    @menu << prepare_item_subs(item)
+
+    item = {
+      nome: "Pedidos",
+      itens: [
+        {
+          controllers: [
             {
-              controller: "GrupoProdutosController",
-              nome: "Grupos",
+              controller: "OperacaoPedidosController",
+              nome: "Pedidos",
               actions: []
-            },
+            }
+          ]
+        }
+      ]
+    }
+
+    @menu << prepare_item_subs(item)
+
+    item = {
+      nome: "Grupos de Acesso",
+      itens: [
+        {
+          controllers: [
             {
-              controller: "EstoquesController",
-              nome: "Estoque",
+              controller: "GrupoAcessosController",
+              nome: "Grupos de Acesso",
               actions: []
             }
           ]

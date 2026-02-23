@@ -2,7 +2,10 @@ class OperacoesController < ApplicationController
   before_action :set_operacao, only: [:show, :edit, :update, :destroy]
 
   def index
-    @operacoes = Operacao.all
+    @operacoes = Operacao.order(created_at: :desc)
+    
+    options = { page: params[:page] || 1, per_page: 10 }
+    @operacoes = @operacoes.paginate(options)
   end
 
   def show
@@ -44,6 +47,7 @@ class OperacoesController < ApplicationController
   end
 
   def operacao_params
-    params.require(:operacao).permit(:qtd, :numero, :pedido_venda, :observacao)
+    params.require(:operacao).permit(:qtd, :numero, :pedido_venda, :observacao,
+      operacao_itens_attributes: [:id, :descricao, :qtd, :_destroy])
   end
 end

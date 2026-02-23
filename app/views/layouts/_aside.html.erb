@@ -50,19 +50,34 @@
             <span class="<%= params[:controller] != 'operacao_pedidos' ? 'text-foreground group-hover:text-primary' : '' %>">Pedidos</span>
           </div>
         </a>
+        <a href="/importacoes" class="group cursor-pointer">
+          <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'importacoes' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
+            <i data-lucide="upload" class="w-5 h-5 <%= params[:controller] != 'importacoes' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
+            <span class="<%= params[:controller] != 'importacoes' ? 'text-foreground group-hover:text-primary' : '' %>">Importações</span>
+          </div>
+        </a>
+        <a href="/grupo_acessos" class="group cursor-pointer">
+          <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'grupo_acessos' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
+            <i data-lucide="shield" class="w-5 h-5 <%= params[:controller] != 'grupo_acessos' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
+            <span class="<%= params[:controller] != 'grupo_acessos' ? 'text-foreground group-hover:text-primary' : '' %>">Grupos de Acesso</span>
+          </div>
+        </a>
       </div>
     </div>
   </nav>
-  <!-- Usuário no rodapé -->
-  <div class="px-6 pb-6 mt-auto">
+    <!-- Usuário no rodapé -->
+  <div class="px-6 pb-6 mt-auto border-t border-border pt-4">
     <div class="flex items-center gap-3">
       <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
         <i data-lucide="user" class="w-6 h-6 text-primary"></i>
       </div>
       <div class="min-w-0 flex-1">
-        <p class="text-foreground text-base font-semibold truncate"><%= @current_user.nome %></p>
-        <p class="text-foreground text-sm font-normal truncate"><%= @current_user.email %></p>
+        <p class="text-foreground text-base font-semibold truncate"><%= @current_user.nome.split(" ").first %></p>
+        <p class="text-foreground text-sm font-normal truncate"><%= @current_user.email.split("@").first %></p>
       </div>
+      <%= link_to sign_up_login_index_path, class: 'p-2 rounded-card text-foreground hover:bg-gray-100 hover:text-primary transition-colors flex-shrink-0', title: 'Sair' do %>
+        <i data-lucide="log-out" class="w-5 h-5"></i>
+      <% end %>
     </div>
   </div>
 </aside>

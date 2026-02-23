@@ -2,10 +2,20 @@ class ProdutosController < ApplicationController
   before_action :set_produto, only: [:show, :edit, :update, :destroy]
 
   def index
-    @produtos = Produto.all
+    @count = Produto.count
+    @produtos = Produto.order(descricao: :asc)
 
     options = { page: params[:page] || 1, per_page: 10 }
     @produtos = @produtos.paginate(options)
+  end
+
+  def buscar
+    @produto = Produto.find_by(codigo: params[:codigo])
+    if @produto
+      render json: { codigo: @produto.codigo, descricao: "#{@produto.codigo} - #{@produto.descricao}" }
+    else
+      render json: { error: "Produto não encontrado" }, status: :not_found
+    end
   end
 
   def show

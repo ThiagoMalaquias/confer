@@ -1,0 +1,63 @@
+<main class="flex-1 lg:ml-64 p-4 md:p-5 bg-white min-h-screen overflow-x-hidden">
+  <!-- Mobile Header -->
+  <div class="lg:hidden flex items-center justify-between mb-6 bg-muted rounded-card p-4">
+    <button onclick="toggleSidebar()" aria-label="Abrir menu" class="p-2 rounded-lg hover:bg-gray-200 cursor-pointer transition-all duration-200">
+      <i data-lucide="menu" class="w-6 h-6 text-foreground"></i>
+    </button>
+    <h1 class="text-foreground text-lg font-bold">Confer</h1>
+    <div class="w-10"></div>
+  </div>
+
+  <!-- Page Header -->
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 md:mb-8">
+    <div class="flex items-center gap-4">
+      <%= link_to importacoes_path, class: 'inline-flex items-center gap-2 px-4 py-2 text-foreground bg-white border border-border rounded-button hover:bg-muted/50 transition-colors' do %>
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+        Voltar
+      <% end %>
+      <div>
+        <h1 class="text-foreground text-2xl md:text-3xl font-bold mb-1">Importação #<%= @importacao.id %></h1>
+        <p class="text-foreground text-sm text-gray-500">Detalhes da importação</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card: Informações da Importação -->
+  <div class="bg-muted rounded-card pt-5 px-3 pb-3 mb-6 md:mb-8">
+    <h3 class="text-foreground text-lg font-bold ml-3 mb-4">Informações da Importação</h3>
+    <div class="bg-white rounded-card p-4 md:p-5 border border-border">
+      <dl class="space-y-4">
+        <div>
+          <dt class="text-sm font-medium text-gray-500">Tipo</dt>
+          <dd class="mt-1">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= @importacao.tipo == 'produto' ? 'bg-primary/10 text-primary' : 'bg-muted text-foreground' %>">
+              <%= @importacao.tipo == 'produto' ? 'Produto' : 'Operação' %>
+            </span>
+          </dd>
+        </div>
+        <div>
+          <dt class="text-sm font-medium text-gray-500">Status</dt>
+          <dd class="mt-1 text-sm font-medium text-foreground"><%= @importacao.status %></dd>
+        </div>
+        <div>
+          <dt class="text-sm font-medium text-gray-500">Arquivo / Relatório</dt>
+          <dd class="mt-1 text-sm text-foreground break-all"><%= @importacao.relatorio %></dd>
+        </div>
+        <div>
+          <dt class="text-sm font-medium text-gray-500">Data de criação</dt>
+          <dd class="mt-1 text-sm text-foreground"><%= @importacao.created_at.strftime("%d/%m/%Y %H:%M") if @importacao.created_at.present? %></dd>
+        </div>
+        <div>
+          <dt class="text-sm font-medium text-gray-500">Última atualização</dt>
+          <dd class="mt-1 text-sm text-foreground"><%= @importacao.updated_at.strftime("%d/%m/%Y %H:%M") if @importacao.updated_at.present? %></dd>
+        </div>
+        <% if @importacao.erros.present? %>
+          <div>
+            <dt class="text-sm font-medium text-gray-500">Erros</dt>
+            <dd class="mt-1 text-sm text-foreground rounded-button p-3 bg-error-light text-error-dark border border-error/20 whitespace-pre-wrap"><%= @importacao.erros %></dd>
+          </div>
+        <% end %>
+      </dl>
+    </div>
+  </div>
+</main>

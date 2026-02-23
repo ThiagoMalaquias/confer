@@ -7,11 +7,14 @@ import { application } from "./application"
 import HelloController from "./hello_controller"
 import HomeChartsController from "./home_charts_controller"
 import LucideController from "./lucide_controller"
+import ImportacaoUploadController from "./importacao_upload_controller"
+import OperacaoItensController from "./operacao_itens_controller"
 
 application.register("hello", HelloController)
 application.register("home-charts", HomeChartsController)
 application.register("lucide", LucideController)
-
+application.register("importacao-upload", ImportacaoUploadController)
+application.register("operacao-itens", OperacaoItensController)
 
 
 

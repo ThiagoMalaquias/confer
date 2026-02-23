@@ -6,11 +6,14 @@ ruby '3.1.2'
 gem 'aws-sdk'
 gem 'cpf_cnpj'
 gem 'down'
+gem "faraday"
 gem 'jbuilder'
 gem 'jwt'
 gem 'importmap-rails'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.7'
 gem 'redis', '~> 4.0'
+gem "mini_magick"
+gem "pdf-reader"
 gem 'pg'
 gem 'pry-rails'
 gem 'puma', '~> 5.0'

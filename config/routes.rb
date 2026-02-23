@@ -7,9 +7,14 @@ Rails.application.routes.draw do
   resources :operacao_pedidos
   resources :operacao_pedido_itens
   resources :administradores
-  resources :produtos
   resources :importacoes
   resources :grupo_acessos
+
+  resources :produtos do
+    collection do
+      get :buscar
+    end
+  end
 
   root to: 'home#index'
 
