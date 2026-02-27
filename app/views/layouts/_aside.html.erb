@@ -20,48 +20,62 @@
     <div>
       <h3 class="text-foreground text-xs font-semibold uppercase tracking-wider mb-3">Conferência</h3>
       <div class="space-y-1">
-        <a href="/" class="group cursor-pointer">
-          <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'home' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
-            <i data-lucide="layout-dashboard" class="w-5 h-5 <%= params[:controller] != 'home' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
-            <span class="<%= params[:controller] != 'home' ? 'text-foreground group-hover:text-primary' : '' %>">Início</span>
-          </div>
-        </a>
+        <% if @current_user.acessos_include?("HomeController") %>
+          <a href="/" class="group cursor-pointer">
+            <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'home' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
+              <i data-lucide="layout-dashboard" class="w-5 h-5 <%= params[:controller] != 'home' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
+              <span class="<%= params[:controller] != 'home' ? 'text-foreground group-hover:text-primary' : '' %>">Início</span>
+            </div>
+          </a>
+        <% end %>
+        <% if @current_user.acessos_include?("ProdutosController::Produtos::index") %>
         <a href="/produtos" class="group cursor-pointer">
           <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'produtos' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
             <i data-lucide="boxes" class="w-5 h-5 <%= params[:controller] != 'produtos' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
             <span class="<%= params[:controller] != 'produtos' ? 'text-foreground group-hover:text-primary' : '' %>">Produtos</span>
           </div>
         </a>
+        <% end %>
+        <% if @current_user.acessos_include?("OperacoesController") %>
         <a href="/operacoes" class="group cursor-pointer">
           <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'operacoes' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
             <i data-lucide="package-check" class="w-5 h-5 <%= params[:controller] != 'operacoes' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
             <span class="<%= params[:controller] != 'operacoes' ? 'text-foreground group-hover:text-primary' : '' %>">OPs</span>
           </div>
         </a>
+        <% end %>
+        <% if @current_user.acessos_include?("OperacaoPedidosController") %>
         <a href="/operacao_pedidos" class="group cursor-pointer">
           <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'operacao_pedidos' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
             <i data-lucide="shopping-basket" class="w-5 h-5 <%= params[:controller] != 'operacao_pedidos' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
             <span class="<%= params[:controller] != 'operacao_pedidos' ? 'text-foreground group-hover:text-primary' : '' %>">Pedidos</span>
           </div>
         </a>
+        <% end %>
+        <% if @current_user.acessos_include?("ImportacoesController") %>
         <a href="/importacoes" class="group cursor-pointer">
           <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'importacoes' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
             <i data-lucide="upload" class="w-5 h-5 <%= params[:controller] != 'importacoes' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
             <span class="<%= params[:controller] != 'importacoes' ? 'text-foreground group-hover:text-primary' : '' %>">Importações</span>
           </div>
         </a>
+        <% end %>
+        <% if @current_user.acessos_include?("AdministradoresController") %>
         <a href="/administradores" class="group cursor-pointer">
           <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'administradores' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
             <i data-lucide="users" class="w-5 h-5 <%= params[:controller] != 'administradores' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
             <span class="<%= params[:controller] != 'administradores' ? 'text-foreground group-hover:text-primary' : '' %>">Usuários Internos</span>
           </div>
         </a>
-        <a href="/grupo_acessos" class="group cursor-pointer">
+        <% end %>
+        <% if @current_user.acessos_include?("GrupoAcessosController") %>
+          <a href="/grupo_acessos" class="group cursor-pointer">
           <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'grupo_acessos' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
             <i data-lucide="shield" class="w-5 h-5 <%= params[:controller] != 'grupo_acessos' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>
             <span class="<%= params[:controller] != 'grupo_acessos' ? 'text-foreground group-hover:text-primary' : '' %>">Grupos de Acesso</span>
           </div>
         </a>
+        <% end %>
       </div>
     </div>
   </nav>

@@ -3,10 +3,14 @@ class ImportacoesController < ApplicationController
 
   def index
     @importacoes = Importacao.order(created_at: :desc)
+    @importacoes = @importacoes.where(tipo: "operacao") if !@current_user.is_admin?
 
     options = { page: params[:page] || 1, per_page: 10 }
     @importacoes = @importacoes.paginate(options)
   end 
+
+  def show
+  end
 
   def create
     @importacao = Importacao.new(importacao_params)

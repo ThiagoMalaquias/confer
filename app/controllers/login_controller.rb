@@ -1,5 +1,5 @@
 class LoginController < ApplicationController
-  skip_before_action :authenticate_manager!, :admin
+  skip_before_action :authenticate_manager!
   layout "login"
 
   def index; end

@@ -23,6 +23,62 @@
       <!-- MAIN CONTENT -->
       <%= yield %>
     </div>
+     <% if flash.any? %>
+      <div class="fixed top-4 left-0 right-0 z-50 flex justify-center pointer-events-none">
+        <div class="w-full max-w-xl space-y-2 pointer-events-auto">
+          <% flash.each do |type, message| %>
+            <% next if message.blank? %>
+
+            <% css_classes =
+              case type.to_sym
+              when :notice, :success
+                "bg-emerald-50 text-emerald-900 border-emerald-300"
+              when :alert, :error
+                "bg-red-50 text-red-900 border-red-300"
+              else
+                "bg-slate-50 text-slate-900 border-slate-300"
+              end
+            %>
+
+            <div
+              class="flash-message rounded-lg border shadow-lg px-4 py-3 flex items-start gap-3 text-sm transition-all duration-300 opacity-100 translate-y-0 <%= css_classes %>"
+              data-controller="flash"
+              data-flash-target="container"
+              data-flash-timeout-value="5000"
+            >
+              <div class="mt-0.5">
+                <% if [:alert, :error].include?(type.to_sym) %>
+                  <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-red-100 text-red-700 text-xs font-semibold">
+                    !
+                  </span>
+                <% else %>
+                  <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold">
+                    ✓
+                  </span>
+                <% end %>
+              </div>
+
+              <div class="flex-1">
+                <p class="font-semibold">
+                  <%= type.to_s == "notice" ? "Tudo certo" : type.to_s.humanize %>
+                </p>
+                <p class="mt-0.5">
+                  <%= message %>
+                </p>
+              </div>
+
+              <button
+                type="button"
+                class="ml-3 text-xs text-slate-500 hover:text-slate-800"
+                data-action="click->flash#close"
+              >
+                ✕
+              </button>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
     <div id="exportModal" class="fixed inset-0 bg-black/50 z-[100] hidden flex items-center justify-center p-4">
       <div class="bg-white rounded-card p-6 max-w-sm w-full text-center">
         <div class="w-16 h-16 bg-info-light rounded-full flex items-center justify-center mx-auto mb-4">

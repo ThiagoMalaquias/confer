@@ -236,16 +236,15 @@ class GrupoAcessosController < ApplicationController
     nomes = {
       new: "Mostrar tela de novo registro",
       index: "Mostre tela inicial",
-      certificado_gerar: "Gerar Certificado",
       update: "Atualizar registro",
       create: "Criar registro",
       destroy: "Apagar registro",
       show: "Mostrar registro",
       edit: "Mostrar tela de edição",
       importar: "Importar",
-      produtos_mais_vendidos: "Produtos mais vendidos",
-      alterar_status: "Alterar status",
-      por_codigo_barras: "Buscar por código de barras"
+      gerar_pedido: "Gerar pedido",
+      buscar: "Buscar por código",
+      buscar_por_ean: "Buscar por EAN",
     }
     
     nomes[action.to_sym]
