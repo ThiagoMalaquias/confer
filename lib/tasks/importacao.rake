@@ -2,7 +2,7 @@ namespace :importacao do
   desc "Alterando status das coberturas"
   task produtos: :environment do
     Importacao.produto.where(status: "PENDENTE").find_each do |importacao|
-      Importar::ProdutoXlsxService.new(importacao.relatorio).call!
+      Importar::ProdutoService.new(importacao.relatorio).call!
       importacao.update(status: "CONCLUIDO")
     rescue Exception => e
       importacao.update(status: "ERRO", erros: e.message)
@@ -12,9 +12,10 @@ namespace :importacao do
   desc "Alterando status das coberturas"
   task operacoes: :environment do
     Importacao.operacao.where(status: "PENDENTE").find_each do |importacao|
-      # Importar::OpPdfService.new(importacao.relatorio).call!
-      # importacao.update(status: "CONCLUIDO")
+      Importar::OperacaoService.new(importacao.relatorio).call!
+      importacao.update(status: "CONCLUIDO")
     rescue Exception => e
+      importacao.update(status: "ERRO", erros: e.message)
     end
   end
 

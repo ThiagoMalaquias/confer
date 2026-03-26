@@ -2,7 +2,10 @@ class GrupoAcessosController < ApplicationController
   before_action :set_grupo_acesso, only: %i[show edit update destroy]
 
   def index
-    @grupo_acessos = GrupoAcesso.all
+    @grupo_acessos = GrupoAcesso.order(nome: :asc)
+
+    options = { page: params[:page] || 1, per_page: 10 }
+    @grupo_acessos = @grupo_acessos.paginate(options)
   end
 
   def show; end
@@ -172,6 +175,11 @@ class GrupoAcessosController < ApplicationController
               controller: "OperacaoPedidosController",
               nome: "Pedidos",
               actions: []
+            },
+            {
+              controller: "OperacaoPedidoItensController",
+              nome: "Itens do Pedido",
+              actions: []
             }
           ]
         }
@@ -245,6 +253,8 @@ class GrupoAcessosController < ApplicationController
       gerar_pedido: "Gerar pedido",
       buscar: "Buscar por código",
       buscar_por_ean: "Buscar por EAN",
+      validar_item: "Validar item",
+      desbloquear: "Desbloquear operação",
     }
     
     nomes[action.to_sym]

@@ -28,7 +28,7 @@
             </div>
           </a>
         <% end %>
-        <% if @current_user.acessos_include?("ProdutosController::Produtos::index") %>
+        <% if @current_user.acessos_include?("Produtos::ProdutosController::index") %>
         <a href="/produtos" class="group cursor-pointer">
           <div class="flex items-center gap-2.5 px-4 py-3 rounded-card <%= params[:controller] == 'produtos' ? 'bg-[#276874] text-white' : 'hover:bg-gray-100' %>">
             <i data-lucide="boxes" class="w-5 h-5 <%= params[:controller] != 'produtos' ? 'text-gray-600 group-hover:text-primary' : '' %>"></i>

@@ -1,8 +1,7 @@
-# app/services/importar/produto_xlsx_service.rb
 require 'open-uri'
 require 'tempfile'
 
-class Importar::ProdutoXlsxService
+class Importar::ProdutoService
   attr_accessor :arquivo_path
 
   def initialize(arquivo_path)
@@ -14,12 +13,15 @@ class Importar::ProdutoXlsxService
     temp.binmode
     temp.write(URI.open(arquivo_path).read)
     temp.close
+    
     begin
-      workbook = SimpleXlsxReader.open(temp.path)
-      worksheets = workbook.sheets
-      worksheets.each do |worksheet|
-        worksheet.rows.each do |line|
-          importar_linha(line)
+      ActiveRecord::Base.transaction do
+        workbook = SimpleXlsxReader.open(temp.path)
+        worksheets = workbook.sheets
+        worksheets.each do |worksheet|
+          worksheet.rows.each do |line|
+            importar_linha(line)
+          end
         end
       end
     ensure

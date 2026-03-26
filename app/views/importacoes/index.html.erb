@@ -57,6 +57,9 @@
                     <%= link_to importacao_path(importacao), class: 'p-2 text-foreground hover:text-primary hover:bg-muted/50 rounded-card transition-colors', title: 'Visualizar' do %>
                       <i data-lucide="eye" class="w-5 h-5"></i>
                     <% end %>
+                    <%= link_to importacao_path(importacao), method: :delete, class: 'p-2 text-foreground hover:text-primary hover:bg-muted/50 rounded-card transition-colors', title: 'Deletar' do %>
+                      <i data-lucide="trash-2" class="w-5 h-5"></i>
+                    <% end %>
                   </div>
                 </td>
               </tr>

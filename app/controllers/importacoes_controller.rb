@@ -1,5 +1,5 @@
 class ImportacoesController < ApplicationController
-  before_action :set_importacao, only: [:show]
+  before_action :set_importacao, only: [:show, :destroy]
 
   def index
     @importacoes = Importacao.order(created_at: :desc)
@@ -20,6 +20,11 @@ class ImportacoesController < ApplicationController
     else
       render :new
     end
+  end
+  
+  def destroy
+    @importacao.destroy
+    redirect_to importacoes_url, notice: 'Importação deletada com sucesso'
   end
 
   private

@@ -19,61 +19,19 @@
     <!-- Grid de operações: 8 por fileira -->
   <div class="bg-muted rounded-card pt-5 px-3 pb-3 mb-6 md:mb-8">
     <h3 class="text-foreground text-lg font-bold ml-3 mb-4">Operações — clique no número para fazer o pedido</h3>
-    <div class="bg-white rounded-card p-4 md:p-5 border border-border mb-3">
-      <%= form_with url: operacao_pedidos_path, method: :get, local: true, class: "space-y-4 md:space-y-0 md:flex md:flex-wrap md:items-end md:gap-4" do |f| %>
-        <div class="flex flex-col gap-1">
-          <label for="numero" class="text-sm font-medium text-foreground">Número da operação</label>
-          <input type="text"
-                 id="numero"
-                 name="numero"
-                 value="<%= params[:numero] %>"
-                 placeholder="Ex: 1234"
-                 class="w-full md:w-40 h-11 px-3 rounded-button border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
-        </div>
-        <div class="flex flex-col gap-1">
-          <label for="data_inicio" class="text-sm font-medium text-foreground">Data início</label>
-          <input type="date"
-                 id="data_inicio"
-                 name="data_inicio"
-                 value="<%= params[:data_inicio] %>"
-                 class="w-full md:w-40 h-11 px-3 rounded-button border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
-        </div>
-        <div class="flex flex-col gap-1">
-          <label for="data_fim" class="text-sm font-medium text-foreground">Data fim</label>
-          <input type="date"
-                 id="data_fim"
-                 name="data_fim"
-                 value="<%= params[:data_fim] %>"
-                 class="w-full md:w-40 h-11 px-3 rounded-button border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
-        </div>
-        <div class="flex flex-col gap-1">
-          <label for="status" class="text-sm font-medium text-foreground">Status</label>
-          <select id="status"
-                  name="status"
-                  class="w-full md:w-44 h-11 px-3 rounded-button border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white">
-            <option value="">Todos</option>
-            <option value="PENDENTE" <%= 'selected' if params[:status] == 'PENDENTE' %>>Pendente</option>
-            <option value="CONCLUIDO" <%= 'selected' if params[:status] == 'CONCLUIDO' %>>Concluído</option>
-            <option value="CANCELADO" <%= 'selected' if params[:status] == 'CANCELADO' %>>Cancelado</option>
-          </select>
-        </div>
-        <div class="flex gap-2">
-          <button type="submit" class="h-11 px-4 rounded-button bg-primary hover:bg-primary-hover text-white font-medium inline-flex items-center gap-2">
-            <i data-lucide="search" class="w-5 h-5"></i>
-            Filtrar
-          </button>
-          <%= link_to operacao_pedidos_path, class: 'h-11 px-4 rounded-button border border-border text-foreground font-medium inline-flex items-center gap-2 hover:bg-muted/50' do %>
-            Limpar
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  
+    <%= render 'search' %>
+
     <div class="bg-white rounded-card p-4 md:p-6 border border-border">
       <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3 md:gap-4">
         <% @operacoes.each do |operacao| %>
-          <%= link_to "/operacao_pedidos/gerar_pedido/#{operacao.id}", class: 'flex items-center justify-center aspect-square min-h-[3.5rem] rounded-card border-2 border-border bg-white text-foreground font-bold text-lg hover:border-primary hover:bg-primary/5 hover:text-primary transition-colors shadow-sm', title: "Operação #{operacao.numero} — Fazer pedido" do %>
-            <%= operacao.numero %>
+          <% if @current_user.is_admin? || @current_user.is_pcp? %>
+            <%= link_to "/operacoes/#{operacao.id}", class: 'flex items-center justify-center aspect-square min-h-[3.5rem] rounded-card border-2 border-border bg-white text-foreground font-bold text-lg hover:border-primary hover:bg-primary/5 hover:text-primary transition-colors shadow-sm', title: "Operação #{operacao.pedido_venda} — Fazer pedido" do %>
+              <%= operacao.pedido_venda %>
+            <% end %>
+          <% else %>
+            <%= link_to "/operacao_pedidos/gerar_pedido/#{operacao.id}", class: 'flex items-center justify-center aspect-square min-h-[3.5rem] rounded-card border-2 border-border bg-white text-foreground font-bold text-lg hover:border-primary hover:bg-primary/5 hover:text-primary transition-colors shadow-sm', title: "Operação #{operacao.pedido_venda} — Fazer pedido" do %>
+              <%= operacao.pedido_venda %>
+            <% end %>
           <% end %>
         <% end %>
       </div>

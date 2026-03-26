@@ -10,6 +10,14 @@ class Administrador < ApplicationRecord
     @is_admin
   end
 
+  def is_pcp?
+    return @is_pcp if @is_pcp.present?
+
+    group_adm = AdministradorGrupoAcesso.where(administrador_id: id)
+    @is_pcp = group_adm.map { |g| g.grupo_acesso.nome.downcase }.include?("pcp")
+    @is_pcp
+  end
+
   def acessos
     return @acessos if @acessos.present?
 

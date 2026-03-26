@@ -2,8 +2,18 @@ class ProdutosController < ApplicationController
   before_action :set_produto, only: [:show, :edit, :update, :destroy]
 
   def index
-    @count = Produto.count
     @produtos = Produto.order(descricao: :asc)
+    @produtos = @produtos.where(codigo: params[:codigo].to_s.strip) if params[:codigo].present?
+    @produtos = @produtos.where(ean: params[:ean].to_s.strip) if params[:ean].present?
+    @produtos = @produtos.where(unc: params[:unc].to_s.strip) if params[:unc].present?
+
+    if params[:descricao].present?
+      termo = params[:descricao].to_s.strip
+      like  = "%#{ActiveRecord::Base.sanitize_sql_like(termo)}%"
+      @produtos = @produtos.where("descricao ILIKE ?", like)
+    end
+
+    @count = @produtos.count
 
     options = { page: params[:page] || 1, per_page: 10 }
     @produtos = @produtos.paginate(options)
@@ -27,11 +37,16 @@ class ProdutosController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def new
-    @produto = Produto.new
+     @produto = Produto.new
+     
+     if params[:descricao].present?
+      codigo, descricao = params[:descricao].strip.split("-")
+      @produto.codigo = codigo.strip
+      @produto.descricao = descricao.strip
+     end
   end
 
   def create
@@ -43,8 +58,7 @@ class ProdutosController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @produto.update(produto_params)

@@ -17,7 +17,7 @@
     <div class="flex items-center gap-2">
       <%= form_with url: importacoes_path, method: :post, local: true, html: { multipart: true, class: "inline", data: { importacao_upload_target: "form" } } do |f| %>
         <%= hidden_field_tag "importacao[tipo]", "operacao", data: { importacao_upload_target: "tipoInput" } %>
-        <input type="file" name="relatorio" accept=".pdf" class="hidden" data-importacao-upload-target="fileInput" data-action="change->importacao-upload#submit">
+        <input type="file" name="relatorio" accept=".xlsx" class="hidden" data-importacao-upload-target="fileInput" data-action="change->importacao-upload#submit">
       <% end %>
       <button type="button" data-action="click->importacao-upload#open" class="inline-flex items-center gap-2 px-4 py-2 rounded-button border border-border text-foreground font-medium hover:bg-muted/50 transition-colors shadow-sm">
         <i data-lucide="upload" class="w-5 h-5"></i>
@@ -33,15 +33,17 @@
   <!-- Table Card -->
   <div class="bg-muted rounded-card pt-5 px-3 pb-3 mb-6 md:mb-8">
     <h3 class="text-foreground text-lg font-bold ml-3 mb-4">Lista de operações</h3>
+    <%= render 'search' %>
     <div class="bg-white rounded-card overflow-hidden border border-border">
       <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-border">
           <thead class="bg-muted/50">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Número</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Pedido de Venda</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Qtd</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">QTD Pedido</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">QTD Intens</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Observação</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Data</th>
               <th class="px-6 py-3 text-right text-xs font-medium text-foreground uppercase tracking-wider">Ações</th>
             </tr>
           </thead>
@@ -50,17 +52,20 @@
               <tr class="hover:bg-muted/30 transition-colors">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground">
                   <%= link_to operacao_path(operacao), class: 'hover:text-primary transition-colors' do %>
-                    <%= operacao.numero %>
+                    <%= operacao.pedido_venda %>
                   <% end %>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-foreground">
-                  <%= operacao.pedido_venda %>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-foreground">
                   <%= operacao.qtd %>
                 </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-foreground">
+                  <%= operacao.operacao_itens.sum(:qtd) %>
+                </td>
                 <td class="px-6 py-4 text-sm text-foreground max-w-xs truncate" title="<%= operacao.observacao %>">
                   <%= operacao.observacao %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-foreground">
+                  <%= operacao.created_at.strftime("%d/%m/%Y") %>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <div class="flex items-center justify-end gap-2">

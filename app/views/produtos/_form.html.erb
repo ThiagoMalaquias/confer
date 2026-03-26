@@ -50,14 +50,20 @@
 <% end %>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form');
-    if (form) {
-      form.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter' && event.target.tagName !== 'BUTTON' && event.target.type !== 'submit') {
-          event.preventDefault();
-        }
-      });
-    }
-  });
+  function bindProdutoFormEnterBlock() {
+    const form = document.querySelector('form[action*="/produtos"]');
+    if (!form) return;
+
+    const eanInput = form.querySelector('#produto_ean, input[name="produto[ean]"]');
+    if (!eanInput) return;
+
+    eanInput.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+      }
+    });
+  }
+
+  document.addEventListener('turbo:load', bindProdutoFormEnterBlock);
+  document.addEventListener('DOMContentLoaded', bindProdutoFormEnterBlock);
 </script>

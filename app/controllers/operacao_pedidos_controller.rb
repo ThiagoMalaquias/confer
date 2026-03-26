@@ -1,11 +1,12 @@
 class OperacaoPedidosController < ApplicationController
   before_action :set_operacao_pedido, only: [:show, :edit, :update]
+  skip_before_action :verify_authenticity_token, only: [:validar_item]
 
   def index
-    @operacoes = Operacao.select(:id, :numero, :status).order(created_at: :desc)
+    @operacoes = Operacao.select(:id, :pedido_venda, :status).order(created_at: :desc)
 
-    if params[:numero].present?
-      @operacoes = @operacoes.where("numero = ?", params[:numero].to_s.strip)
+    if params[:pedido_venda].present?
+      @operacoes = @operacoes.where("pedido_venda = ?", params[:pedido_venda].to_s.strip)
     end
 
     if params[:data_inicio].present? && params[:data_fim].present?
@@ -27,6 +28,16 @@ class OperacaoPedidosController < ApplicationController
     @operacao_pedido.save!
   end
 
+  def validar_item
+    result = OperacaoPedidos::ValidarItemService.new(
+      id_operacao: params[:id_operacao],
+      params_operacao_pedido: params[:operacao_pedido],
+      current_user: @current_user
+    ).call
+  
+    render json: result.payload, status: result.status
+  end
+
   def show
   end
 
@@ -37,7 +48,7 @@ class OperacaoPedidosController < ApplicationController
   def create
     @operacao_pedido = OperacaoPedido.new(operacao_pedido_params)
     if @operacao_pedido.save
-      redirect_to operacao_pedidos_url, notice: 'Pedido criado com sucesso'
+      redirect_to "/operacao_pedidos/gerar_pedido/#{@operacao_pedido.operacao_id}", notice: 'Pedido criado com sucesso'
     else
       render :new
     end
@@ -48,11 +59,29 @@ class OperacaoPedidosController < ApplicationController
 
   def update
     if @operacao_pedido.update(operacao_pedido_params)
-      redirect_to operacao_pedidos_url, notice: 'Pedido atualizado com sucesso'
+      resultado = OperacaoPedidos::ValidarProdutosService.new(
+        operacao_pedido: @operacao_pedido
+      ).call
+  
+      unless resultado.ok?
+        @operacao_pedido.operacao.update(status: "ERRO", mensagem_erro: "O operador da linha #{@current_user.nome} tentou Gerar OP, mas com divergências: #{resultado.errors.join(', ')}.")
+
+        @operacao_pedido.update(
+          status: "ERRO",
+          erros: "#{(resultado.errors.join(', '))}"
+        )
+  
+        redirect_to "/operacao_pedidos/gerar_pedido/#{@operacao_pedido.operacao_id}", alert: "Pedido salvo, mas com divergências. Verifique os itens do pedido."
+        return
+      end
+  
+      @operacao_pedido.update(status: "CONCLUIDO", erros: nil)
+      @operacao_pedido.operacao.update(status: "CONCLUIDO", mensagem_erro: nil)
+      redirect_to "/operacao_pedidos/gerar_pedido/#{@operacao_pedido.operacao_id}", notice: "Pedido atualizado com sucesso"
     else
       render :edit
     end
-  end  
+  end
 
   private
 

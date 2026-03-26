@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :operacoes
+  resources :operacoes do
+    get "desbloquear", on: :member, action: :desbloquear
+  end
   resources :operacao_pedido_itens
   resources :administradores
   resources :importacoes
@@ -7,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :operacao_pedidos do
     get "gerar_pedido/:id_operacao", on: :collection, action: :gerar_pedido
+    post "validar_item", on: :collection, action: :validar_item
   end
 
   resources :produtos do

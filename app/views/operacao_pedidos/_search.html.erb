@@ -1,0 +1,50 @@
+<div class="bg-white rounded-card p-4 md:p-5 border border-border mb-3">
+  <%= form_with url: operacao_pedidos_path, method: :get, local: true, class: "space-y-4 md:space-y-0 md:flex md:flex-wrap md:items-end md:gap-4" do |f| %>
+    <div class="flex flex-col gap-1">
+      <label for="pedido_venda" class="text-sm font-medium text-foreground">Pedido de venda</label>
+      <input type="text"
+              id="pedido_venda"
+              name="pedido_venda"
+              value="<%= params[:pedido_venda] %>"
+              placeholder="Ex: 1234"
+              class="w-full md:w-40 h-11 px-3 rounded-button border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+    </div>
+    <div class="flex flex-col gap-1">
+      <label for="data_inicio" class="text-sm font-medium text-foreground">Data início</label>
+      <input type="date"
+              id="data_inicio"
+              name="data_inicio"
+              value="<%= params[:data_inicio] %>"
+              class="w-full md:w-40 h-11 px-3 rounded-button border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+    </div>
+    <div class="flex flex-col gap-1">
+      <label for="data_fim" class="text-sm font-medium text-foreground">Data fim</label>
+      <input type="date"
+              id="data_fim"
+              name="data_fim"
+              value="<%= params[:data_fim] %>"
+              class="w-full md:w-40 h-11 px-3 rounded-button border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+    </div>
+    <div class="flex flex-col gap-1">
+      <label for="status" class="text-sm font-medium text-foreground">Status</label>
+      <select id="status"
+              name="status"
+              class="w-full md:w-44 h-11 px-3 rounded-button border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white">
+        <option value="">Todos</option>
+        <option value="PENDENTE" <%= 'selected' if params[:status] == 'PENDENTE' %>>Pendente</option>
+        <option value="CONCLUIDO" <%= 'selected' if params[:status] == 'CONCLUIDO' %>>Concluído</option>
+        <option value="CANCELADO" <%= 'selected' if params[:status] == 'CANCELADO' %>>Cancelado</option>
+        <option value="ERRO" <%= 'selected' if params[:status] == 'ERRO' %>>Erro</option>
+      </select>
+    </div>
+    <div class="flex gap-2">
+      <button type="submit" class="h-11 px-4 rounded-button bg-primary hover:bg-primary-hover text-white font-medium inline-flex items-center gap-2">
+        <i data-lucide="search" class="w-5 h-5"></i>
+        Filtrar
+      </button>
+      <%= link_to operacao_pedidos_path, class: 'h-11 px-4 rounded-button border border-border text-foreground font-medium inline-flex items-center gap-2 hover:bg-muted/50' do %>
+        Limpar
+      <% end %>
+    </div>
+  <% end %>
+</div>
