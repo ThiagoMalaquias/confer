@@ -77,6 +77,7 @@ class OperacaoPedidosController < ApplicationController
   
       @operacao_pedido.update(status: "CONCLUIDO", erros: nil)
       @operacao_pedido.operacao.update(status: "CONCLUIDO", mensagem_erro: nil)
+      EmailsMailer.operacao_concluida(@operacao_pedido.operacao).deliver
       redirect_to "/operacao_pedidos/gerar_pedido/#{@operacao_pedido.operacao_id}", notice: "Pedido atualizado com sucesso"
     else
       render :edit

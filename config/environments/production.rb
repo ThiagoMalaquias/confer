@@ -89,10 +89,10 @@ Rails.application.configure do
     address: "smtp-relay.brevo.com",
     port: 587,
     enable_starttls_auto: true,
-    user_name: "8a2bcf001@smtp-brevo.com", # seu login de SMTP
-    password: Rails.application.credentials.brevo[:password],
+    user_name: "88dcad001@smtp-brevo.com", # seu login de SMTP
+    password: Rails.application.credentials.brevo_password,
     authentication: 'login',               # tipo de autenticação correto
-    domain: 'dignobeneficios.com.br'
+    domain: 'ritmoinova.com.br'
   }
 
   # Use a different logger for distributed setups.
