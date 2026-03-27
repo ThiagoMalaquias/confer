@@ -93,8 +93,8 @@ class OperacaoPedidosController < ApplicationController
   def email_operacao_concluida
     operacao = @operacao_pedido.operacao
 
-    emails = ["tammalaquias@gmail.com"]
-    # emails = ["tammalaquias@gmail.com", "supervisor.mg@capitaldascestas.com.br", "comprasmg@capitaldascestas.com.br", "com162@capitaldascestas.com.br", "diretoriamg@capitaldascestas.com.br"]
+    # emails = ["tammalaquias@gmail.com"]
+    emails = ["tammalaquias@gmail.com", "supervisor.mg@capitaldascestas.com.br", "comprasmg@capitaldascestas.com.br", "com162@capitaldascestas.com.br", "diretoriamg@capitaldascestas.com.br"]
     emails.each do |email|
       EmailsMailer.operacao_concluida(operacao, email).deliver
     end
