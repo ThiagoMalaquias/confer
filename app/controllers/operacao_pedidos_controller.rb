@@ -77,7 +77,7 @@ class OperacaoPedidosController < ApplicationController
   
       @operacao_pedido.update(status: "CONCLUIDO", erros: nil)
       @operacao_pedido.operacao.update(status: "CONCLUIDO", mensagem_erro: nil)
-      EmailsMailer.operacao_concluida(@operacao_pedido.operacao).deliver
+      email_operacao_concluida
       redirect_to "/operacao_pedidos/gerar_pedido/#{@operacao_pedido.operacao_id}", notice: "Pedido atualizado com sucesso"
     else
       render :edit
@@ -88,6 +88,16 @@ class OperacaoPedidosController < ApplicationController
 
   def set_operacao_pedido
     @operacao_pedido = OperacaoPedido.find(params[:id])
+  end
+
+  def email_operacao_concluida
+    operacao = @operacao_pedido.operacao
+
+    emails = ["tammalaquias@gmail.com"]
+    # emails = ["tammalaquias@gmail.com", "supervisor.mg@capitaldascestas.com.br", "comprasmg@capitaldascestas.com.br", "com162@capitaldascestas.com.br", "diretoriamg@capitaldascestas.com.br"]
+    emails.each do |email|
+      EmailsMailer.operacao_concluida(operacao, email).deliver
+    end
   end
 
   def operacao_pedido_params

@@ -41,6 +41,8 @@ class Importar::ProdutoService
     produto.ean = linha[ean]
     produto.descricao = linha[descricao]
     produto.unc = linha[unc]
+    produto.created_at = DateTime.now
+    produto.updated_at = DateTime.now
     produto.save
   end
 end
