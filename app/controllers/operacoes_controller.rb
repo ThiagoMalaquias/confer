@@ -7,6 +7,10 @@ class OperacoesController < ApplicationController
     if params[:pedido_venda].present?
       @operacoes = @operacoes.where(pedido_venda: params[:pedido_venda].to_s.strip)
     end
+
+    if params[:status].present?
+      @operacoes = @operacoes.where(status: params[:status])
+    end
   
     if params[:data_inicio].present?
       inicio = Date.parse(params[:data_inicio]) rescue nil

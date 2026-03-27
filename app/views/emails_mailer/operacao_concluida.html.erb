@@ -1,5 +1,5 @@
 <% operacao_pedido = @operacao.operacao_pedidos.first %>
-<% itens = operacao_pedido&.operacao_pedido_itens || [] %>
+<% itens = operacao_pedido&.operacao_pedido_itens.order(:descricao) || [] %>
 
 <div style="margin:0; padding:24px; background-color:#f3f4f6; font-family:Arial, Helvetica, sans-serif; color:#111827;">
   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:800px; margin:0 auto; background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; overflow:hidden;">

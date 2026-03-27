@@ -25,11 +25,11 @@
       <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3 md:gap-4">
         <% @operacoes.each do |operacao| %>
           <% if @current_user.is_admin? || @current_user.is_pcp? %>
-            <%= link_to "/operacoes/#{operacao.id}", class: 'flex items-center justify-center aspect-square min-h-[3.5rem] rounded-card border-2 border-border bg-white text-foreground font-bold text-lg hover:border-primary hover:bg-primary/5 hover:text-primary transition-colors shadow-sm', title: "Operação #{operacao.pedido_venda} — Fazer pedido" do %>
+            <%= link_to "/operacoes/#{operacao.id}", class: status_class(operacao), title: "Operação #{operacao.pedido_venda} — Fazer pedido" do %>
               <%= operacao.pedido_venda %>
             <% end %>
           <% else %>
-            <%= link_to "/operacao_pedidos/gerar_pedido/#{operacao.id}", class: 'flex items-center justify-center aspect-square min-h-[3.5rem] rounded-card border-2 border-border bg-white text-foreground font-bold text-lg hover:border-primary hover:bg-primary/5 hover:text-primary transition-colors shadow-sm', title: "Operação #{operacao.pedido_venda} — Fazer pedido" do %>
+            <%= link_to "/operacao_pedidos/gerar_pedido/#{operacao.id}", class: status_class(operacao), title: "Operação #{operacao.pedido_venda} — Fazer pedido" do %>
               <%= operacao.pedido_venda %>
             <% end %>
           <% end %>

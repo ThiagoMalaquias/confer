@@ -42,6 +42,7 @@
               <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Pedido de Venda</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">QTD Pedido</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">QTD Intens</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Status</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Observação</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Data</th>
               <th class="px-6 py-3 text-right text-xs font-medium text-foreground uppercase tracking-wider">Ações</th>
@@ -60,6 +61,9 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-foreground">
                   <%= operacao.operacao_itens.sum(:qtd) %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-foreground">
+                  <%= operacao.status %>
                 </td>
                 <td class="px-6 py-4 text-sm text-foreground max-w-xs truncate" title="<%= operacao.observacao %>">
                   <%= operacao.observacao %>
