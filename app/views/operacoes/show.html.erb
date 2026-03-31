@@ -22,21 +22,26 @@
         <p class="text-foreground text-sm text-gray-500">Detalhes da operação</p>
       </div>
     </div>
-    <%= link_to edit_operacao_path(@operacao), class: 'inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-button font-medium transition-colors shadow-sm' do %>
-      <i data-lucide="pencil" class="w-5 h-5"></i>
-      Editar
-    <% end %>
+    <div>
+      <%= link_to edit_operacao_path(@operacao), class: 'inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-button font-medium transition-colors shadow-sm' do %>
+        <i data-lucide="pencil" class="w-5 h-5"></i>
+        Editar
+      <% end %>
+      <% if @operacao.status == "CONCLUIDO" %>
+        <%= link_to cancelar_operacao_path(@operacao), data: { confirm: 'Tem certeza que deseja cancelar esta operação?' },
+            class: "inline-flex items-center gap-2 px-4 h-10 rounded-button text-white text-sm font-medium transition-colors shadow-sm", style: "background-color: #FF0000;" do %>
+          <i data-lucide="x" class="w-4 h-4"></i>
+          Cancelar
+        <% end %>
+      <% end %>
+    </div>
   </div>
 
   <!-- Card: Informações da Operação -->
   <div class="bg-muted rounded-card pt-5 px-3 pb-3 mb-6 md:mb-8">
     <h3 class="text-foreground text-lg font-bold ml-3 mb-4">Informações da Operação</h3>
     <div class="bg-white rounded-card p-4 md:p-5 border border-border">
-      <dl class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div>
-          <dt class="text-sm font-medium text-gray-500">Número</dt>
-          <dd class="mt-1 text-sm font-medium text-foreground"><%= @operacao.numero.presence || "—" %></dd>
-        </div>
+      <dl class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div>
           <dt class="text-sm font-medium text-gray-500">Pedido de Venda</dt>
           <dd class="mt-1 text-sm font-medium text-foreground"><%= @operacao.pedido_venda.presence || "—" %></dd>
@@ -44,6 +49,10 @@
         <div>
           <dt class="text-sm font-medium text-gray-500">Quantidade</dt>
           <dd class="mt-1 text-sm font-medium text-foreground"><%= @operacao.qtd.presence || "—" %></dd>
+        </div>
+        <div>
+          <dt class="text-sm font-medium text-gray-500">Status</dt>
+          <dd class="mt-1 text-sm font-medium text-foreground"><%= @operacao.status.presence || "—" %></dd>
         </div>
         <% if @operacao.observacao.present? %>
           <div class="md:col-span-2">

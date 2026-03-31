@@ -55,15 +55,15 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
-  config.action_mailer.smtp_settings = {
-    address: "smtp-relay.brevo.com",
-    port: 587,
-    enable_starttls_auto: true,
-    user_name: "a626a5001@smtp-brevo.com", # seu login de SMTP
-    password: Rails.application.credentials.brevo[:password],
-    authentication: 'login',               # tipo de autenticação correto
-    domain: 'confer-2acec3da4a1a.herokuapp.com'
-  }
+  # config.action_mailer.smtp_settings = {
+  #   address: "smtp-relay.brevo.com",
+  #   port: 587,
+  #   enable_starttls_auto: true,
+  #   user_name: "a626a5001@smtp-brevo.com", # seu login de SMTP
+  #   password: Rails.application.credentials.brevo[:password],
+  #   authentication: 'login',               # tipo de autenticação correto
+  #   domain: 'confer-2acec3da4a1a.herokuapp.com'
+  # }
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large

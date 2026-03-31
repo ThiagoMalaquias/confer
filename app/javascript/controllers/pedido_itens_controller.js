@@ -33,9 +33,17 @@ export default class extends Controller {
     const fabricacao = this.fabricacaoInputTarget.value?.trim()
     const prazo = this.prazoInputTarget.value?.trim()
 
-    if (!ean || !lote || !vencimento) return
+    if (!ean || !lote) return
+    if (!vencimento && !fabricacao && !prazo) {
+      alert("Vencimento, fabricação ou prazo é obrigatório.")
+      return
+    }
+    if (vencimento && (fabricacao || prazo)) {
+      alert("Vencimento é obrigatório quando fabricação ou prazo não são informados.")
+      return
+    }
     if (fabricacao && !prazo) {
-      alert("Prazo é obrigatório quando fabricacao é informado.")
+      alert("Prazo é obrigatório quando fabricação é informado.")
       return
     }
 
@@ -76,22 +84,22 @@ export default class extends Controller {
   addRow(produto) {
     const template = this.rowTemplateTarget
     const html = template.innerHTML.replace(/__INDEX__/g, this.index)
-    this.containerTarget.insertAdjacentHTML("beforeend", html)
+    this.containerTarget.insertAdjacentHTML("afterbegin", html)
 
-    const lastRow = this.containerTarget.querySelector("tr[data-item-row]:last-child")
-    const codigoInput = lastRow.querySelector("input[name*='[codigo]']")
-    const descricaoInput = lastRow.querySelector("input[name*='[descricao]']")
-    const idInput = lastRow.querySelector("input[name*='[id]']") // novo
-    const loteInput = lastRow.querySelector("input[name*='[lote]']")
-    const vencimentoInput = lastRow.querySelector("input[name*='[vencimento]']")
-    const fabricacaoInput = lastRow.querySelector("input[name*='[fabricacao]']")
-    const prazoInput = lastRow.querySelector("input[name*='[prazo]']")
-    const descricaoCell = lastRow.querySelector(".descricao-cell")
+    const firstRow = this.containerTarget.querySelector("tr[data-item-row]:first-child")
+    const codigoInput = firstRow.querySelector("input[name*='[codigo]']")
+    const descricaoInput = firstRow.querySelector("input[name*='[descricao]']")
+    const idInput = firstRow.querySelector("input[name*='[id]']") // novo
+    const loteInput = firstRow.querySelector("input[name*='[lote]']")
+    const vencimentoInput = firstRow.querySelector("input[name*='[vencimento]']")
+    const fabricacaoInput = firstRow.querySelector("input[name*='[fabricacao]']")
+    const prazoInput = firstRow.querySelector("input[name*='[prazo]']")
+    const descricaoCell = firstRow.querySelector(".descricao-cell")
 
     if (codigoInput) codigoInput.value = produto.codigo || ""
     if (descricaoInput) descricaoInput.value = produto.descricao || ""
     if (idInput) idInput.value = produto.item_id || ""                 // novo
-    if (produto.item_id) lastRow.dataset.itemId = String(produto.item_id) // novo
+    if (produto.item_id) firstRow.dataset.itemId = String(produto.item_id) // novo
 
     if (loteInput) loteInput.value = this.loteInputTarget?.value ?? ""
     if (vencimentoInput) vencimentoInput.value = this.vencimentoInputTarget?.value ?? ""

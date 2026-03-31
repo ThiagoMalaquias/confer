@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_03_26_132718) do
+ActiveRecord::Schema.define(version: 2026_03_31_192215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2026_03_26_132718) do
     t.text "descricao"
     t.string "lote"
     t.date "vencimento"
-    t.string "fabricacao"
+    t.date "fabricacao"
     t.string "prazo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

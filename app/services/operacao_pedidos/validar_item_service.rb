@@ -14,7 +14,7 @@ class OperacaoPedidos::ValidarItemService
     operacao_pedido_itens = operacao_pedido.operacao_pedido_itens
 
     ean = @params_operacao_pedido[:ean].to_s.strip
-    produto = Produto.find_by(ean: ean)
+    produto = Produto.find_by("lower(ean) = lower(?)", ean.strip)
 
     if produto.nil?
       msg_operacao = "O operador da linha #{@current_user.nome} tentou adicionar o EAN #{ean} porém o produto não foi encontrado."
@@ -47,6 +47,19 @@ class OperacaoPedidos::ValidarItemService
       operacao_pedido.update(erros: msg_pedido, status: "ERRO")
 
       return failure(status: :unprocessable_entity, error: "Quantidade de itens já atingida")
+    end
+
+    date_now = Date.today
+    date_vencimento = Date.parse(@params_operacao_pedido[:vencimento].to_s.strip) if @params_operacao_pedido[:vencimento].present?
+
+    if date_vencimento.present? && (date_vencimento - 60.days < date_now)
+      msg_operacao = "O operador da linha #{@current_user.nome} tentou adicionar o produto #{produto.descricao} porém a data de vencimento está próxima de expirar."
+      msg_pedido = "A data de vencimento do produto #{produto.descricao} está próxima de expirar."
+
+      operacao.update(mensagem_erro: msg_operacao, status: "ERRO")
+      operacao_pedido.update(erros: msg_pedido, status: "ERRO")
+
+      return failure(status: :unprocessable_entity, error: "Data de vencimento próxima de expirar")
     end
 
     item = salvar_operacao_pedido_item(operacao_pedido, produto)

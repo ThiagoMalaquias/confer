@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :operacoes do
     get "desbloquear", on: :member, action: :desbloquear
+    get "cancelar", on: :member, action: :cancelar
   end
   resources :operacao_pedido_itens
   resources :administradores

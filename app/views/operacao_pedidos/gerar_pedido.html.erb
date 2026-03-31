@@ -85,12 +85,15 @@
           <div class="flex-1 min-w-[140px]">
             <label for="ean-add" class="block text-sm font-medium text-foreground mb-1">EAN do produto</label>
             <input type="text"
-                id="ean-add"
-                data-pedido-itens-target="eanInput"
-                data-action="keydown.enter->pedido-itens#preventEnter:prevent"
-                placeholder="EAN (Enter para adicionar)"
-                class="w-full h-11 px-3 rounded-button border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm"
-                autocomplete="off">
+              id="ean-add"
+              data-pedido-itens-target="eanInput"
+              data-action="keydown.enter->pedido-itens#preventEnter:prevent"
+              placeholder="EAN (Enter para adicionar)"
+              maxlength="13"
+              inputmode="numeric"
+              pattern="^\d{13}$"
+              class="w-full h-11 px-3 rounded-button border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm"
+              autocomplete="off">
           </div>
           <div class="w-32">
             <label for="lote-add" class="block text-sm font-medium text-foreground mb-1">Lote</label>
@@ -107,17 +110,22 @@
               Vencimento
             </label>
 
-            <input
-              type="date"
+            <input type="date"
               id="vencimento-add"
               data-pedido-itens-target="vencimentoInput"
+              min="1900-01-01"
+              max="9999-12-31"
               class="w-full h-11 px-3 rounded-button border border-border bg-white text-foreground text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition"
             >
           </div>
-          <div class="w-32">
+          <div class="w-full md:w-[220px]">
             <label for="fabricacao-add" class="block text-sm font-medium text-foreground mb-1">Fabricação</label>
-            <input type="text" id="fabricacao-add" data-pedido-itens-target="fabricacaoInput" placeholder="Fabricação"
-                  class="w-full h-11 px-3 rounded-button border border-border text-foreground focus:ring-2 focus:ring-primary/20 text-sm">
+            <input type="date"
+              id="fabricacao-add"
+              data-pedido-itens-target="fabricacaoInput"
+              min="1900-01-01"
+              max="9999-12-31"
+              class="w-full h-11 px-3 rounded-button border border-border text-foreground focus:ring-2 focus:ring-primary/20 text-sm">
           </div>
           <div class="w-28">
             <label for="prazo-add" class="block text-sm font-medium text-foreground mb-1">Prazo</label>
@@ -151,7 +159,7 @@
             </tr>
           </thead>
           <tbody data-pedido-itens-target="container">
-            <% @operacao_pedido.operacao_pedido_itens.order(:descricao).each_with_index do |item, idx| %>
+            <% @operacao_pedido.operacao_pedido_itens.order(created_at: :desc).each_with_index do |item, idx| %>
               <tr data-item-row class="border-t border-border">
                 <td class="px-4 py-2">
                   <%= text_field_tag "operacao_pedido[operacao_pedido_itens_attributes][#{idx}][codigo]", item.codigo, readonly: true, class: "w-full h-10 px-3 rounded-button border border-border bg-muted/30 text-foreground text-sm" %>
@@ -166,7 +174,7 @@
                   <%= text_field_tag "operacao_pedido[operacao_pedido_itens_attributes][#{idx}][vencimento]", item.vencimento&.strftime("%Y-%m-%d"), type: "date", class: "w-full h-10 px-3 rounded-button border border-border text-foreground text-sm" %>
                 </td>
                 <td class="px-4 py-2">
-                  <%= text_field_tag "operacao_pedido[operacao_pedido_itens_attributes][#{idx}][fabricacao]", item.fabricacao, class: "w-full h-10 px-3 rounded-button border border-border text-foreground text-sm" %>
+                  <%= text_field_tag "operacao_pedido[operacao_pedido_itens_attributes][#{idx}][fabricacao]", item.fabricacao&.strftime("%Y-%m-%d"), type: "date", class: "w-full h-10 px-3 rounded-button border border-border text-foreground text-sm" %>
                 </td>
                 <td class="px-4 py-2">
                   <%= text_field_tag "operacao_pedido[operacao_pedido_itens_attributes][#{idx}][prazo]", item.prazo, class: "w-full h-10 px-3 rounded-button border border-border text-foreground text-sm" %>
@@ -201,7 +209,7 @@
               <input type="date" name="operacao_pedido[operacao_pedido_itens_attributes][__INDEX__][vencimento]" class="w-full h-10 px-3 rounded-button border border-border text-foreground text-sm">
             </td>
             <td class="px-4 py-2">
-              <input type="text" name="operacao_pedido[operacao_pedido_itens_attributes][__INDEX__][fabricacao]" class="w-full h-10 px-3 rounded-button border border-border text-foreground text-sm">
+              <input type="date" name="operacao_pedido[operacao_pedido_itens_attributes][__INDEX__][fabricacao]" class="w-full h-10 px-3 rounded-button border border-border text-foreground text-sm">
             </td>
             <td class="px-4 py-2">
               <input type="text" name="operacao_pedido[operacao_pedido_itens_attributes][__INDEX__][prazo]" class="w-full h-10 px-3 rounded-button border border-border text-foreground text-sm">

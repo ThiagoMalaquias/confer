@@ -1,5 +1,5 @@
 class OperacoesController < ApplicationController
-  before_action :set_operacao, only: [:show, :edit, :update, :destroy, :desbloquear]
+  before_action :set_operacao, only: [:show, :edit, :update, :destroy, :desbloquear, :cancelar]
 
   def index
     @operacoes = Operacao.order(created_at: :desc)
@@ -30,6 +30,14 @@ class OperacoesController < ApplicationController
     @operacao.update(status: "PENDENTE", mensagem_erro: nil)
     @operacao.operacao_pedidos.first.update(erros: nil, status: "PENDENTE")
     redirect_to operacao_url(@operacao), notice: 'Operação desbloqueada com sucesso'
+  end
+
+  def cancelar
+    @operacao.update(status: "PENDENTE")
+    @operacao.operacao_pedidos.first.update(erros: nil, status: "PENDENTE")
+    @operacao.operacao_pedidos.first.operacao_pedido_itens.destroy_all
+    email_operacao_cancelada
+    redirect_to operacao_url(@operacao), notice: 'Operação cancelada com sucesso'
   end
 
   def show
@@ -65,6 +73,14 @@ class OperacoesController < ApplicationController
   end
 
   private
+
+  def email_operacao_cancelada
+    # emails = ["tammalaquias@gmail.com"]
+    emails = ["tammalaquias@gmail.com", "supervisor.mg@capitaldascestas.com.br", "comprasmg@capitaldascestas.com.br", "com162@capitaldascestas.com.br", "diretoriamg@capitaldascestas.com.br"]
+    emails.each do |email|
+      EmailsMailer.operacao_cancelada(@operacao, email).deliver
+    end
+  end
 
   def set_operacao
     @operacao = Operacao.find(params[:id])
