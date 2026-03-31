@@ -2,21 +2,22 @@ class ProdutosController < ApplicationController
   before_action :set_produto, only: [:show, :edit, :update, :destroy]
 
   def index
-    @produtos = Produto.order(descricao: :asc)
+    sort_column = %w[codigo ean descricao unc].include?(params[:sort]) ? params[:sort] : "descricao"
+    sort_direction = %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  
+    @produtos = Produto.order("#{sort_column} #{sort_direction}")
     @produtos = @produtos.where(codigo: params[:codigo].to_s.strip) if params[:codigo].present?
     @produtos = @produtos.where(ean: params[:ean].to_s.strip) if params[:ean].present?
     @produtos = @produtos.where(unc: params[:unc].to_s.strip) if params[:unc].present?
-
+  
     if params[:descricao].present?
       termo = params[:descricao].to_s.strip
       like  = "%#{ActiveRecord::Base.sanitize_sql_like(termo)}%"
       @produtos = @produtos.where("descricao ILIKE ?", like)
     end
-
+  
     @count = @produtos.count
-
-    options = { page: params[:page] || 1, per_page: 10 }
-    @produtos = @produtos.paginate(options)
+    @produtos = @produtos.paginate(page: params[:page] || 1, per_page: 10)
   end
 
   def buscar

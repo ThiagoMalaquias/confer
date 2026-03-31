@@ -39,10 +39,29 @@
         <table class="min-w-full divide-y divide-border">
           <thead class="bg-muted/50">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Código</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">EAN</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Descrição</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Unidade</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                <%= link_to "Código #{params[:sort] == 'codigo' && params[:direction] == 'asc' ? '↑' : '↓'}",
+                    request.query_parameters.merge(sort: "codigo", direction: (params[:sort] == "codigo" && params[:direction] == "asc" ? "desc" : "asc"), page: nil),
+                    class: "inline-flex items-center gap-1 hover:text-primary" %>
+              </th>
+
+              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                <%= link_to "EAN #{params[:sort] == 'ean' && params[:direction] == 'asc' ? '↑' : '↓'}",
+                    request.query_parameters.merge(sort: "ean", direction: (params[:sort] == "ean" && params[:direction] == "asc" ? "desc" : "asc"), page: nil),
+                    class: "inline-flex items-center gap-1 hover:text-primary" %>
+              </th>
+
+              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                <%= link_to "Descrição #{params[:sort] == 'descricao' && params[:direction] == 'asc' ? '↑' : '↓'}",
+                    request.query_parameters.merge(sort: "descricao", direction: (params[:sort] == "descricao" && params[:direction] == "asc" ? "desc" : "asc"), page: nil),
+                    class: "inline-flex items-center gap-1 hover:text-primary" %>
+              </th>
+
+              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                <%= link_to "Unidade #{params[:sort] == 'unc' && params[:direction] == 'asc' ? '↑' : '↓'}",
+                    request.query_parameters.merge(sort: "unc", direction: (params[:sort] == "unc" && params[:direction] == "asc" ? "desc" : "asc"), page: nil),
+                    class: "inline-flex items-center gap-1 hover:text-primary" %>
+              </th>
               <th class="px-6 py-3 text-right text-xs font-medium text-foreground uppercase tracking-wider">Ações</th>
             </tr>
           </thead>
