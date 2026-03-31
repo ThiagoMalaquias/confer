@@ -20,6 +20,10 @@
         <p class="text-foreground text-sm text-gray-500">Detalhes da importação</p>
       </div>
     </div>
+    <%= link_to edit_importacao_path(@importacao), class: 'inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-button font-medium transition-colors shadow-sm' do %>
+      <i data-lucide="pencil" class="w-5 h-5"></i>
+      Editar
+    <% end %>
   </div>
 
   <!-- Card: Informações da Importação -->

@@ -1,5 +1,5 @@
 class ImportacoesController < ApplicationController
-  before_action :set_importacao, only: [:show, :destroy]
+  before_action :set_importacao, only: [:show, :edit, :update, :destroy]
 
   def index
     @importacoes = Importacao.order(created_at: :desc)
@@ -12,6 +12,14 @@ class ImportacoesController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
+  def update
+    @importacao.update(importacao_params)
+    redirect_to importacao_url(@importacao), notice: 'Importação atualizada com sucesso'
+  end
+
   def create
     @importacao = Importacao.new(importacao_params)
     @importacao.relatorio = AwsService.upload(params[:relatorio].tempfile.path, params[:relatorio].original_filename)
@@ -20,6 +28,11 @@ class ImportacoesController < ApplicationController
     else
       render :new
     end
+  end
+  
+  def update
+    @importacao.update(importacao_params)
+    redirect_to importacao_url(@importacao), notice: 'Importação atualizada com sucesso'
   end
   
   def destroy
@@ -34,6 +47,6 @@ class ImportacoesController < ApplicationController
   end
 
   def importacao_params
-    params.require(:importacao).permit(:tipo)
+    params.require(:importacao).permit(:status, :erros)
   end
 end

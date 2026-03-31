@@ -81,6 +81,6 @@ class ProdutosController < ApplicationController
   end
 
   def produto_params
-    params.require(:produto).permit(:codigo, :ean, :descricao, :unc)
+    params.require(:produto).permit(:codigo, :ean, :descricao, :unc, :requer_validacao_ean)
   end
 end

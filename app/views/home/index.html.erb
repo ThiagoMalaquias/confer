@@ -24,7 +24,7 @@
       <div class="bg-white rounded-card p-5">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-foreground text-4xl font-extrabold mb-1"><%= Operacao.count %></p>
+            <p class="text-foreground text-4xl font-extrabold mb-1"><%= @operacoes %></p>
             <p class="text-green-600 text-sm font-medium">Total de operações</p>
           </div>
           <div class="w-16 h-16 bg-accent-lime rounded-icon flex items-center justify-center">
@@ -39,7 +39,7 @@
       <div class="bg-white rounded-card p-5">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-foreground text-4xl font-extrabold mb-1"><%= Operacao.where(status: "CONCLUIDO").count %></p>
+            <p class="text-foreground text-4xl font-extrabold mb-1"><%= @count_pedidos_baixados %></p>
             <p class="text-green-600 text-sm font-medium">Total de pedidos baixados</p>
           </div>
           <div class="w-16 h-16 bg-accent-teal rounded-icon flex items-center justify-center">
@@ -54,7 +54,7 @@
       <div class="bg-white rounded-card p-5">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-foreground text-4xl font-extrabold mb-1"><%= Operacao.where(status: "PENDENTE").count %></p>
+            <p class="text-foreground text-4xl font-extrabold mb-1"><%= @count_pedidos_a_baixar %></p>
             <p class="text-blue-600 text-sm font-medium">Total de pedidos a baixar</p>
           </div>
           <div class="w-16 h-16 bg-accent-peach rounded-icon flex items-center justify-center">
@@ -69,7 +69,7 @@
       <div class="bg-white rounded-card p-5">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-foreground text-4xl font-extrabold mb-1"><%= Operacao.where(status: "CONCLUIDO").count * Operacao.where(status: "CONCLUIDO").sum(:qtd) %></p>
+            <p class="text-foreground text-4xl font-extrabold mb-1"><%= @count_cestas_a_montar %></p>
             <p class="text-red-600 text-sm font-medium">Total de cestas a montar</p>
           </div>
           <div class="w-16 h-16 bg-accent-lime rounded-icon flex items-center justify-center">

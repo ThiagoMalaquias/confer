@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_03_31_192215) do
+ActiveRecord::Schema.define(version: 2026_03_31_215900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2026_03_31_192215) do
     t.string "unc"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "requer_validacao_ean", default: true
   end
 
   add_foreign_key "administrador_grupo_acessos", "administradores"

@@ -1,5 +1,11 @@
 class HomeController < ApplicationController
   def index
+    @operacoes = Operacao.count
+    @pedidos_baixados = Operacao.where(status: "CONCLUIDO")
+    @count_pedidos_baixados = @pedidos_baixados.count
+    @count_pedidos_a_baixar = Operacao.where(status: "PENDENTE").count
+    @count_cestas_a_montar = @pedidos_baixados.count * @pedidos_baixados.sum(:qtd)
+
       # Dados para o gráfico de receita (linha)
     @revenue_labels = %w[Jan Fev Mar Abr Mai Jun]
     @revenue_data = [42, 55, 48, 67, 58, 72]

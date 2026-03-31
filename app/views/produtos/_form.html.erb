@@ -37,6 +37,20 @@
         <%= f.label :unc, "Unidade", class: "block text-sm font-medium text-foreground mb-2" %>
         <%= f.text_field :unc, class: "w-full h-11 px-3 rounded-button border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary", placeholder: "Ex: UN, CX, KG" %>
       </div>
+      <div class="flex items-start gap-3 rounded-button border border-border bg-muted/30 p-4">
+        <div class="flex h-11 items-center">
+          <%= f.check_box :requer_validacao_ean,
+                class: "h-4 w-4 rounded border-border text-primary focus:ring-2 focus:ring-primary/20" %>
+        </div>
+        <div class="min-w-0 flex-1">
+          <%= f.label :requer_validacao_ean, class: "block text-sm font-medium text-foreground cursor-pointer" do %>
+            Requer validação de EAN
+          <% end %>
+          <p class="mt-1 text-xs text-gray-500">
+            Quando ativado, o fluxo de conferência exige leitura/confirmação do EAN deste produto.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 

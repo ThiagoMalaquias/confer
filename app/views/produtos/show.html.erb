@@ -47,6 +47,10 @@
           <dt class="text-sm font-medium text-gray-500">Unidade</dt>
           <dd class="mt-1 text-sm text-foreground"><%= @produto.unc %></dd>
         </div>
+        <div>
+          <dt class="text-sm font-medium text-gray-500">Requer validação de EAN</dt>
+          <dd class="mt-1 text-sm text-foreground"><%= @produto.requer_validacao_ean ? "Sim" : "Não" %></dd>
+        </div>
       </dl>
     </div>
   </div>

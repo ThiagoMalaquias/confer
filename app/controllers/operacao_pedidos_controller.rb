@@ -26,6 +26,8 @@ class OperacaoPedidosController < ApplicationController
     @operacao_pedido = OperacaoPedido.find_or_initialize_by(operacao_id: @operacao.id)
     @operacao_pedido.administrador_id = @current_user.id
     @operacao_pedido.save!
+
+    OperacaoPedidos::PrefillItensSemValidacaoEanService.new(operacao_pedido: @operacao_pedido).call
   end
 
   def validar_item

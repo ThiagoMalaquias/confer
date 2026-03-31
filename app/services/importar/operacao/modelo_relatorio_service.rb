@@ -1,7 +1,8 @@
+
 require 'open-uri'
 require 'tempfile'
 
-class Importar::OperacaoService
+class Importar::Operacao::ModeloRelatorioService
   attr_accessor :arquivo_path
 
   def initialize(arquivo_path)

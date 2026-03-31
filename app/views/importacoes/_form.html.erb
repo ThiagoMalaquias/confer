@@ -1,0 +1,41 @@
+<%= form_for(@importacao, html: { class: "space-y-6", role: "form" }) do |f| %>
+  <% if @importacao.errors.any? %>
+    <div class="text-sm rounded-button p-4 bg-error-light text-error-dark border border-error/20" role="alert">
+      <div class="flex items-start gap-3">
+        <i data-lucide="alert-circle" class="w-5 h-5 flex-shrink-0"></i>
+        <div class="flex-1">
+          <h3 class="font-medium mb-1">Confira os erros abaixo:</h3>
+          <ul class="list-disc list-inside text-sm">
+            <% @importacao.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Informações da Importação -->
+  <div>
+    <h2 class="text-foreground text-lg font-bold mb-4 pb-2 border-b border-border">
+      Informações 
+    </h2>
+    <div class="space-y-6">
+      <div>
+        <%= f.label :status, class: "block text-sm font-medium text-foreground mb-2" %>
+        <%= f.select :status,
+      [["Pendente", "PENDENTE"], ["Concluído", "CONCLUIDO"], ["Erro", "ERRO"]],
+      {},
+      { class: "w-full h-11 px-3 rounded-button border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white" } %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botão Submit -->
+  <div class="flex justify-end gap-4 pt-4 border-t border-border">
+    <%= link_to produtos_path, class: 'px-6 py-2 rounded-button border border-border text-foreground font-medium hover:bg-muted/50 transition-colors' do %>
+      Cancelar
+    <% end %>
+    <%= f.submit "Salvar", class: "px-6 py-2 rounded-button bg-primary hover:bg-primary-hover text-white font-medium transition-colors shadow-sm" %>
+  </div>
+<% end %>
