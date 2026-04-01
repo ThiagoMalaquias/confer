@@ -1,24 +1,42 @@
 class ProdutosController < ApplicationController
+  PRODUTOS_BUSCA_SESSION_KEY = :produtos_busca
+  PERMITTED_INDEX_KEYS = %i[codigo ean descricao unc sort direction].freeze
+
   before_action :set_produto, only: [:show, :edit, :update, :destroy]
 
   def index
-    sort_column = %w[codigo ean descricao unc].include?(params[:sort]) ? params[:sort] : "descricao"
-    sort_direction = %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-  
+    if params[:limpar].present?
+      session.delete(PRODUTOS_BUSCA_SESSION_KEY)
+      redirect_to produtos_path and return
+    end
+
+    filtros = params.permit(*PERMITTED_INDEX_KEYS).to_h
+    if request.get? && filtros_na_url_vazios?(filtros) && session[PRODUTOS_BUSCA_SESSION_KEY].present?
+      redirect_to produtos_path(session[PRODUTOS_BUSCA_SESSION_KEY]) and return
+    end
+
+    sort_column = %w[codigo ean descricao unc].include?(filtros[:sort]) ? filtros[:sort] : "descricao"
+    sort_direction = %w[asc desc].include?(filtros[:direction]) ? filtros[:direction] : "asc"
+
     @produtos = Produto.order("#{sort_column} #{sort_direction}")
-    @produtos = @produtos.where(codigo: params[:codigo].to_s.strip) if params[:codigo].present?
-    @produtos = @produtos.where(ean: params[:ean].to_s.strip) if params[:ean].present?
-    @produtos = @produtos.where(unc: params[:unc].to_s.strip) if params[:unc].present?
-  
-    if params[:descricao].present?
-      termo = params[:descricao].to_s.strip
+    @produtos = @produtos.where(codigo: filtros[:codigo].to_s.strip) if filtros[:codigo].present?
+    @produtos = @produtos.where(ean: filtros[:ean].to_s.strip) if filtros[:ean].present?
+    @produtos = @produtos.where(unc: filtros[:unc].to_s.strip) if filtros[:unc].present?
+
+    if filtros[:descricao].present?
+      termo = filtros[:descricao].to_s.strip
       like  = "%#{ActiveRecord::Base.sanitize_sql_like(termo)}%"
       @produtos = @produtos.where("descricao ILIKE ?", like)
     end
-  
+
     @count = @produtos.count
     @produtos = @produtos.paginate(page: params[:page] || 1, per_page: 10)
+   
+    if filtros_para_salvar_na_sessao?(filtros)
+      session[PRODUTOS_BUSCA_SESSION_KEY] = filtros
+    end
   end
+
 
   def buscar
     @produto = Produto.find_by(codigo: params[:codigo])
@@ -75,6 +93,16 @@ class ProdutosController < ApplicationController
   end
 
   private
+
+  def filtros_na_url_vazios?(f)
+    f[:codigo].blank? && f[:ean].blank? && f[:descricao].blank? && f[:unc].blank? &&
+      f[:sort].blank? && f[:direction].blank?
+  end
+
+  def filtros_para_salvar_na_sessao?(f)
+    f[:codigo].present? || f[:ean].present? || f[:descricao].present? || f[:unc].present? ||
+      f[:sort].present? || f[:direction].present?
+  end
 
   def set_produto
     @produto = Produto.find(params[:id])
