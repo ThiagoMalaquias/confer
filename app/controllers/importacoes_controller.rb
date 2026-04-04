@@ -26,7 +26,8 @@ class ImportacoesController < ApplicationController
     if @importacao.save
       redirect_to importacoes_url, notice: 'Importação criada com sucesso. Em breve os dados serão importados.'
     else
-      render :new
+      flash[:error] = @importacao.errors.full_messages.join(", ")
+      redirect_to importacoes_url
     end
   end
   
@@ -47,6 +48,6 @@ class ImportacoesController < ApplicationController
   end
 
   def importacao_params
-    params.require(:importacao).permit(:status, :erros)
+    params.require(:importacao).permit(:status, :erros, :tipo)
   end
 end

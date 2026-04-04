@@ -1,5 +1,5 @@
 # Capture um novo backup do Heroku
-heroku pg:backups:capture --app app-cesta-funeral
+heroku pg:backups:capture --app confer
 
 # Verifique se o diretório existe, e crie-o se não existir
 DIRECTORY="$HOME/Downloads/Bancos"
@@ -8,7 +8,7 @@ if [ ! -d "$DIRECTORY" ]; then
 fi
 
 # Defina o caminho completo do arquivo
-FILE="$DIRECTORY/cesta-funeral"
+FILE="$DIRECTORY/confer"
 
 # Cria o arquivo se ele não existir
 if [ ! -f "$FILE" ]; then
@@ -16,14 +16,14 @@ if [ ! -f "$FILE" ]; then
 fi
 
 # Baixe o backup e mova-o para o local especificado
-heroku pg:backups:download --app app-cesta-funeral
+heroku pg:backups:download --app confer
 mv latest.dump "$FILE"
 
 brew services restart postgresql@14 2>/dev/null || brew services restart postgresql 2>/dev/null || echo "PostgreSQL já está rodando"
 
 # Execute as tarefas do Rails e restaure o banco de dados
 rails db:drop DISABLE_DATABASE_ENVIRONMENT_CHECK=1 db:create
-pg_restore --verbose --clean -U "$USER" -d cesta_visconti_development "$FILE"
+pg_restore --verbose --clean -U "$USER" -d confer_development "$FILE"
 
 # Inicie o servidor Rails na porta 3001
 rails s -p 3001
