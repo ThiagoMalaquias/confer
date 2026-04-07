@@ -31,8 +31,6 @@ class OperacaoPedidos::ValidarProdutosService
 
   private
 
-  # operacao_itens.descricao costuma vir como "CODIGO - DESCRICAO"
-  # e qtd representa quantas unidades desse produto devem existir no pedido.
   def produtos_esperados_por_codigo
     hash = Hash.new(0)
 
