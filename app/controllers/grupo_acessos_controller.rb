@@ -254,8 +254,9 @@ class GrupoAcessosController < ApplicationController
       buscar: "Buscar por código",
       buscar_por_ean: "Buscar por EAN",
       validar_item: "Validar item",
-      desbloquear: "Desbloquear operação",
-      cancelar: "Cancelar operação",
+      desbloquear: "Desbloquear OP",
+      cancelar: "Cancelar OP",
+      gerar_excel: "Gerar Excel",
     }
     
     nomes[action.to_sym]

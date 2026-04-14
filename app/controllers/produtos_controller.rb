@@ -37,6 +37,28 @@ class ProdutosController < ApplicationController
     end
   end
 
+  def gerar_excel
+    filtros = params.permit(*PERMITTED_INDEX_KEYS).to_h
+
+    sort_column = %w[codigo ean descricao unc].include?(filtros[:sort]) ? filtros[:sort] : "descricao"
+    sort_direction = %w[asc desc].include?(filtros[:direction]) ? filtros[:direction] : "asc"
+
+    produtos = Produto.order("#{sort_column} #{sort_direction}")
+    produtos = produtos.where(codigo: filtros[:codigo].to_s.strip) if filtros[:codigo].present?
+    produtos = produtos.where(ean: filtros[:ean].to_s.strip) if filtros[:ean].present?
+    produtos = produtos.where(unc: filtros[:unc].to_s.strip) if filtros[:unc].present?
+
+    if filtros[:descricao].present?
+      termo = filtros[:descricao].to_s.strip
+      like  = "%#{ActiveRecord::Base.sanitize_sql_like(termo)}%"
+      produtos = produtos.where("descricao ILIKE ?", like)
+    end
+
+    link = Exportar::ProdutosService.call("produtos.xlsx", produtos.pluck(:id))
+    render json: { link: link }, status: :ok
+  rescue => e
+    render json: { error: e.message }, status: :unprocessable_entity
+  end
 
   def buscar
     @produto = Produto.find_by(codigo: params[:codigo])

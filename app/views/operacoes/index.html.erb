@@ -11,8 +11,8 @@
   <!-- Page Header -->
   <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 md:mb-8" data-controller="importacao-upload" data-importacao-upload-tipo-value="operacao">
     <div>
-      <h1 class="text-foreground text-2xl md:text-3xl font-bold mb-1">Operações</h1>
-      <p class="text-foreground text-sm text-gray-500 mt-1">Gerencie as operações do sistema</p>
+      <h1 class="text-foreground text-2xl md:text-3xl font-bold mb-1">OPs</h1>
+      <p class="text-foreground text-sm text-gray-500 mt-1">Gerencie as OPs do sistema</p>
     </div>
     <div class="flex items-center gap-2">
       <%= form_with url: importacoes_path, method: :post, local: true, html: { multipart: true, class: "inline", data: { importacao_upload_target: "form" } } do |f| %>
@@ -25,26 +25,50 @@
       </button>
       <%= link_to new_operacao_path, class: 'inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-button font-medium transition-colors shadow-sm' do %>
         <i data-lucide="plus" class="w-5 h-5"></i>
-        Nova Operação
+        Nova OP
       <% end %>
     </div>
   </div>
 
   <!-- Table Card -->
   <div class="bg-muted rounded-card pt-5 px-3 pb-3 mb-6 md:mb-8">
-    <h3 class="text-foreground text-lg font-bold ml-3 mb-4">Lista de operações</h3>
+    <h3 class="text-foreground text-lg font-bold ml-3 mb-4">Lista de OPs</h3>
     <%= render 'search' %>
     <div class="bg-white rounded-card overflow-hidden border border-border">
       <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-border">
           <thead class="bg-muted/50">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Pedido de Venda</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">QTD Pedido</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">QTD Intens</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Status</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Observação</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">Data</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                <%= link_to "Pedido de Venda #{params[:sort] == 'pedido_venda' && params[:direction] == 'asc' ? '↑' : '↓'}",
+                    request.query_parameters.merge(sort: "pedido_venda", direction: (params[:sort] == "pedido_venda" && params[:direction] == "asc" ? "desc" : "asc"), page: nil),
+                    class: "inline-flex items-center gap-1 hover:text-primary" %>
+              </th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                <%= link_to "QTD Pedido #{params[:sort] == 'qtd' && params[:direction] == 'asc' ? '↑' : '↓'}",
+                    request.query_parameters.merge(sort: "qtd", direction: (params[:sort] == "qtd" && params[:direction] == "asc" ? "desc" : "asc"), page: nil),
+                    class: "inline-flex items-center gap-1 hover:text-primary" %>
+              </th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                <%= link_to "QTD Intens #{params[:sort] == 'itens_qtd' && params[:direction] == 'asc' ? '↑' : '↓'}",
+                    request.query_parameters.merge(sort: "itens_qtd", direction: (params[:sort] == "itens_qtd" && params[:direction] == "asc" ? "desc" : "asc"), page: nil),
+                    class: "inline-flex items-center gap-1 hover:text-primary" %>
+              </th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                <%= link_to "Status #{params[:sort] == 'status' && params[:direction] == 'asc' ? '↑' : '↓'}",
+                    request.query_parameters.merge(sort: "status", direction: (params[:sort] == "status" && params[:direction] == "asc" ? "desc" : "asc"), page: nil),
+                    class: "inline-flex items-center gap-1 hover:text-primary" %>
+              </th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                <%= link_to "Observação #{params[:sort] == 'observacao' && params[:direction] == 'asc' ? '↑' : '↓'}",
+                    request.query_parameters.merge(sort: "observacao", direction: (params[:sort] == "observacao" && params[:direction] == "asc" ? "desc" : "asc"), page: nil),
+                    class: "inline-flex items-center gap-1 hover:text-primary" %>
+              </th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                <%= link_to "Data #{params[:sort] == 'created_at' && params[:direction] == 'asc' ? '↑' : '↓'}",
+                    request.query_parameters.merge(sort: "created_at", direction: (params[:sort] == "created_at" && params[:direction] == "asc" ? "desc" : "asc"), page: nil),
+                    class: "inline-flex items-center gap-1 hover:text-primary" %>
+              </th>
               <th class="px-6 py-3 text-right text-xs font-medium text-foreground uppercase tracking-wider">Ações</th>
             </tr>
           </thead>
@@ -79,7 +103,7 @@
                     <%= link_to edit_operacao_path(operacao), class: 'p-2 text-foreground hover:text-primary hover:bg-muted/50 rounded-card transition-colors', title: 'Editar' do %>
                       <i data-lucide="pencil" class="w-5 h-5"></i>
                     <% end %>
-                    <%= link_to operacao_path(operacao), method: :delete, data: { confirm: 'Tem certeza que deseja excluir esta operação?' }, class: 'p-2 text-foreground hover:text-red-600 hover:bg-red-50 rounded-card transition-colors', title: 'Excluir' do %>
+                    <%= link_to operacao_path(operacao), method: :delete, data: { confirm: 'Tem certeza que deseja excluir esta OP?' }, class: 'p-2 text-foreground hover:text-red-600 hover:bg-red-50 rounded-card transition-colors', title: 'Excluir' do %>
                       <i data-lucide="trash-2" class="w-5 h-5"></i>
                     <% end %>
                   </div>

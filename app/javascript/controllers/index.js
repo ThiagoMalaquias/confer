@@ -11,6 +11,7 @@ import ImportacaoUploadController from "./importacao_upload_controller"
 import OperacaoItensController from "./operacao_itens_controller"
 import PedidoItensController from "./pedido_itens_controller"
 import FlashController from "./flash_controller"
+import ProdutosController from "./produtos_controller"
 
 application.register("hello", HelloController)
 application.register("home-charts", HomeChartsController)
@@ -19,6 +20,7 @@ application.register("importacao-upload", ImportacaoUploadController)
 application.register("operacao-itens", OperacaoItensController)
 application.register("pedido-itens", PedidoItensController)
 application.register("flash", FlashController)
+application.register("produtos", ProdutosController)
 
 
 

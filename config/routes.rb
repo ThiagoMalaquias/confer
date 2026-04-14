@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     collection do
       get :buscar
       get :buscar_por_ean
+      get :gerar_excel
     end
   end
 

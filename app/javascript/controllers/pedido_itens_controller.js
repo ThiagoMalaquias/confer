@@ -11,18 +11,30 @@ export default class extends Controller {
   blockEnterOnForm(event) {
     const isEnter =
       event.key === "Enter" ||
+      event.key === "Return" ||
       event.code === "Enter" ||
       event.code === "NumpadEnter" ||
       event.keyCode === 13
 
     if (!isEnter) return
     if (event.target && event.target.tagName === "TEXTAREA") return
+    if (event.target && event.target.closest("button")) return
 
     event.preventDefault()
   }
 
   preventEnter(event) {
     event.preventDefault()
+  }
+
+  focusLoteWhenEanComplete(event) {
+    const digitsOnly = event.target.value.replace(/\D/g, "").slice(0, 13)
+    event.target.value = digitsOnly
+
+    if (digitsOnly.length === 13) {
+      this.loteInputTarget.focus()
+      this.loteInputTarget.select()
+    }
   }
 
   addByEan(event) {

@@ -10,4 +10,10 @@ class EmailsMailer < ApplicationMailer
 
     mail(to: email, subject: "Montagens Cestas - Capital das Cestas - Pedido #{operacao.pedido_venda} - CANCELADA")
   end
+
+  def operacao_excluida(operacao, email)
+    @operacao = operacao
+
+    mail(to: email, subject: "Montagens Cestas - Capital das Cestas - Pedido #{operacao.pedido_venda} - EXCLUÍDA")
+  end
 end

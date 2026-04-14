@@ -3,7 +3,7 @@ class OperacaoPedidosController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:validar_item]
 
   def index
-    @operacoes = Operacao.select(:id, :pedido_venda, :status).order(created_at: :desc)
+    @operacoes = Operacao.select(:id, :pedido_venda, :status).order(pedido_venda: :asc)
 
     if params[:pedido_venda].present?
       @operacoes = @operacoes.where("pedido_venda = ?", params[:pedido_venda].to_s.strip)

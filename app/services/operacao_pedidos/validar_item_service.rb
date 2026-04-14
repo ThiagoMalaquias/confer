@@ -110,10 +110,10 @@ class OperacaoPedidos::ValidarItemService
 
   def produto_fora_da_operacao
     registrar_erro!(
-      erro_operacao: "O operador da linha #{@current_user.nome} tentou adicionar o produto #{produto.descricao}, porém o produto não foi encontrado na operação.",
-      erro_pedido: "O produto #{produto.descricao} não foi encontrado na operação.",
+      erro_operacao: "O operador da linha #{@current_user.nome} tentou adicionar o produto #{produto.descricao}, porém o produto não foi encontrado na OP.",
+      erro_pedido: "O produto #{produto.descricao} não foi encontrado na OP.",
       status_http: :unprocessable_entity,
-      mensagem: "Produto não encontrado na operação"
+      mensagem: "Produto não encontrado na OP"
     )
   end
 

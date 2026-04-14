@@ -21,10 +21,31 @@ class ImportacoesController < ApplicationController
   end
 
   def create
+    arquivo = params[:relatorio]
+  
+    unless arquivo.present?
+      flash[:error] = "Selecione um arquivo."
+      redirect_to importacoes_url
+      return
+    end
+  
+    extensao_ok = File.extname(arquivo.original_filename.to_s).downcase == ".xlsx"
+    mime_ok = [
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "application/octet-stream" 
+    ].include?(arquivo.content_type)
+  
+    unless extensao_ok && mime_ok
+      flash[:error] = "Arquivo inválido. Envie um arquivo .xlsx."
+      redirect_to importacoes_url
+      return
+    end
+  
     @importacao = Importacao.new(importacao_params)
-    @importacao.relatorio = AwsService.upload(params[:relatorio].tempfile.path, params[:relatorio].original_filename)
+    @importacao.relatorio = AwsService.upload(arquivo.tempfile.path, arquivo.original_filename)
+  
     if @importacao.save
-      redirect_to importacoes_url, notice: 'Importação criada com sucesso. Em breve os dados serão importados.'
+      redirect_to importacoes_url, notice: "Importação criada com sucesso. Em breve os dados serão importados."
     else
       flash[:error] = @importacao.errors.full_messages.join(", ")
       redirect_to importacoes_url

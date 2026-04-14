@@ -9,7 +9,7 @@
   </div>
 
   <!-- Page Header -->
-  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 md:mb-8" data-controller="importacao-upload" data-importacao-upload-tipo-value="produto">
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 md:mb-8" data-controller="importacao-upload produtos" data-importacao-upload-tipo-value="produto">
     <div>
       <h1 class="text-foreground text-2xl md:text-3xl font-bold mb-1">Produtos</h1>
       <p class="text-foreground text-sm text-gray-500 mt-1">Gerencie os produtos do sistema</p>
@@ -23,6 +23,12 @@
         <i data-lucide="upload" class="w-5 h-5"></i>
         Importação
       </button>
+      <% if @produtos.any? %>
+        <button type="button" data-action="click->produtos#gerarExcel" class="inline-flex items-center gap-2 px-4 py-2 rounded-button border border-border text-foreground font-medium hover:bg-muted/50 transition-colors shadow-sm">
+          <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+          Gerar Excel
+        </button>
+      <% end %>
       <%= link_to new_produto_path, class: 'inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-button font-medium transition-colors shadow-sm' do %>
         <i data-lucide="plus" class="w-5 h-5"></i>
         Novo Produto
