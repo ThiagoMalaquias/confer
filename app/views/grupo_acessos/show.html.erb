@@ -51,11 +51,11 @@
             </dd>
           </div>
           <div>
-            <dt class="text-sm font-medium text-gray-500">Total de Administradores</dt>
+            <dt class="text-sm font-medium text-gray-500">Total de Usuarios Internos</dt>
             <dd class="mt-1">
-              <% admins_count = @grupo_acesso.administrador_grupo_acessos.count %>
+              <% usuarios_internos_count = @grupo_acesso.administrador_grupo_acessos.count %>
               <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-muted text-foreground">
-                <%= admins_count %> administrador<%= 'es' if admins_count != 1 %>
+                <%= usuarios_internos_count %> usuario interno<%= 's' if usuarios_internos_count != 1 %>
               </span>
             </dd>
           </div>
@@ -65,7 +65,7 @@
 
     <!-- Card: Administradores -->
     <div class="bg-muted rounded-card pt-5 px-3 pb-3">
-      <h3 class="text-foreground text-lg font-bold ml-3 mb-4">Administradores</h3>
+      <h3 class="text-foreground text-lg font-bold ml-3 mb-4">Usuarios Internos</h3>
       <div class="bg-white rounded-card p-4 md:p-5 border border-border">
         <% if @grupo_acesso.administrador_grupo_acessos.any? %>
           <div class="space-y-2">
@@ -81,7 +81,7 @@
             <% end %>
           </div>
         <% else %>
-          <p class="text-sm text-gray-500">Nenhum administrador atribuído a este grupo</p>
+          <p class="text-sm text-gray-500">Nenhum usuario interno atribuído a este grupo</p>
         <% end %>
       </div>
     </div>

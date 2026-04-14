@@ -4,7 +4,7 @@ class HomeController < ApplicationController
     @pedidos_baixados = Operacao.where(status: "CONCLUIDO")
     @count_pedidos_baixados = @pedidos_baixados.count
     @count_pedidos_a_baixar = Operacao.where(status: "PENDENTE").count
-    @count_cestas_a_montar = @pedidos_baixados.sum(:qtd)
+    @count_cestas_a_montar = Operacao.sum(:qtd)
 
       # Dados para o gráfico de receita (linha)
     @revenue_labels = %w[Jan Fev Mar Abr Mai Jun]
